@@ -1,0 +1,19 @@
+.container {
+  position: fixed;
+  top: 6dvh;
+  left: 0;
+  width: 100vw;
+  height: 60dvh;
+  z-index: 20;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  
+  img {
+    width: 30vw;
+  }
+}

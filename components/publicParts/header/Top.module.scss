@@ -1,0 +1,27 @@
+@import "../../../styles/Variable.scss";
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 5dvh;
+  background: $bg_lv2;
+  color: $main_text;
+  display: flex;
+  justify-content: space-between;
+  z-index: 30;
+
+  .left {
+  }
+  .right {
+  }
+  .center {
+    padding: 10px 0;
+    font-size: 17px;
+    letter-spacing: 1.5px;
+    font-family: area-normal, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+}

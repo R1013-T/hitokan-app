@@ -1,0 +1,102 @@
+@import "./Variable.scss";
+
+.wrapper {
+  width: 100vw;
+  height: 100dvh;
+
+  .cover {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 19;
+    background: rgba($color: #fff, $alpha: 0.5);
+    backdrop-filter: blur(1px);
+  }
+}
+
+.inner {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  .buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+
+    button {
+      width: 80vw;
+      margin: 0 auto;
+      padding: 8px;
+      text-align: center;
+      display: block;
+      color: $main_text;
+      font-size: 12px;
+      font-family: area-normal, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 1.3px;
+      border-radius: 3px;
+
+      &.signup {
+        padding: 9px;
+        background: $bg_lv2;
+      }
+
+      &.signin {
+        margin: 14px auto 0;
+        border: 1px solid $bg_lv2;
+      }
+
+      &.google {
+        padding: 0;
+        font-weight: 700;
+        margin: 10px auto 20px;
+        background: #c0c0c0;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+
+        .image {
+          width: 50px;
+          height: 22px;
+          margin: 7px;
+          text-align: right;
+        }
+
+        p {
+          line-height: 3.2;
+        }
+
+        .space {
+          width: 50px;
+        }
+      }
+    }
+  }
+
+  .or {
+    &::before,
+    &::after {
+      border-top: 1px solid;
+      content: "";
+      width: 35vw; /* 線の長さ */
+    }
+    &::before {
+      margin-right: 1em;
+    }
+    &::after {
+      margin-left: 1em;
+    }
+    margin-top: 20px;
+    display: flex;
+    align-items: center; /* 垂直中心 */
+    justify-content: center; /* 水平中心 */
+    color: $stoke_lv2;
+    font-size: 12px;
+  }
+}

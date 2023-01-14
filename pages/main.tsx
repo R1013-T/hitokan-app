@@ -12,6 +12,7 @@ const main = () => {
   return (
     <div>
       {auth.currentUser?.email}
+      <br />
       {auth.currentUser?.displayName}
       <br />
       <button onClick={handleClickLogout}>logout</button>

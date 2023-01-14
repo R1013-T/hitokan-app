@@ -9,9 +9,9 @@ const CenterImage = (props: Props) => {
     <div className={styles.container}>
       <div className={styles.inner}>
         {props.isLoading ? (
-          <img src="images/LoadingIcon.svg" alt="　" />
+          <img src="LoadingIcon.svg" alt="　" />
         ) : (
-          <img src="images/icon.svg" alt="　" />
+          <img src="icon.svg" alt="　" />
         )}
       </div>
     </div>

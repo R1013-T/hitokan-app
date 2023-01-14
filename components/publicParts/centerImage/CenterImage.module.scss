@@ -4,17 +4,16 @@
   left: 0;
   width: 100vw;
   height: 60dvh;
-  z-index: 20;
+  z-index: inherit;
 }
 
 .inner {
-  width: 30%;
+  width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
   
   img {
     width: 30vw;
-    height: 30vw;
   }
 }

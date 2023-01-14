@@ -8,12 +8,13 @@
 }
 
 .inner {
-  width: 100%;
+  width: 30%;
   height: 100%;
   display: grid;
   place-items: center;
   
   img {
     width: 30vw;
+    height: 30vw;
   }
 }

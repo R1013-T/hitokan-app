@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./CenterImage.module.scss";
 
 interface Props {
@@ -9,9 +10,9 @@ const CenterImage = (props: Props) => {
     <div className={styles.container}>
       <div className={styles.inner}>
         {props.isLoading ? (
-          <img src="./images/LoadingIcon.svg" alt="" />
+          <Image src="./images/LoadingIcon.svg" layout='fill' objectFit='contain' alt="" />
         ) : (
-          <img src="./images/icon.svg" alt="" />
+          <Image src="./images/icon.svg" layout='fill' objectFit='contain' alt="" />
         )}
       </div>
     </div>

@@ -11,7 +11,7 @@ const CenterImage = (props: Props) => {
         {props.isLoading ? (
           <img src="LoadingIcon.svg" alt="　" />
         ) : (
-          <img src="icon.svg" alt="　" />
+          <img src="Icon.svg" alt="　" />
         )}
       </div>
     </div>

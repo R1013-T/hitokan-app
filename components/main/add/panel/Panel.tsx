@@ -3,6 +3,9 @@ import styles from "./panel.module.scss";
 import { VscChromeClose } from "react-icons/vsc";
 import { useRef } from "react";
 import { useState } from "react";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { auth, db } from "lib/firebase";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   email: string;
@@ -10,6 +13,8 @@ interface Props {
 }
 
 const Panel = (props: Props) => {
+  const [isCover, setIsCover] = useState(false);
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [birth, setBirth] = useState("");
@@ -17,20 +22,40 @@ const Panel = (props: Props) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("email: ", props.email);
-    console.log("name: ", name);
-    console.log("age: ", age);
-    console.log("birth: ", birth);
-    console.log("organization: ", organization);
-    console.log("email: ", email);
-    console.log("phone: ", phone);
+    // const usersRef = collection(db, "users");
+
+    // await setDoc(doc(usersRef, "new"), {
+    //   name: "aaa",
+    // });
+
+    const user = auth.currentUser;
+
+    const usersCollectionRef = collection(db, "users", user!.uid, "peoples");
+    setDoc(doc(usersCollectionRef), {
+      name: "aaa",
+      age: 20,
+    });
+
+    const snapShots = await getDocs(usersCollectionRef);
+    snapShots.forEach((doc) => {
+      console.log(doc.id, doc.data());
+    });
+
+    // console.log("email: ", props.email);
+    // console.log("name: ", name);
+    // console.log("age: ", age);
+    // console.log("birth: ", birth);
+    // console.log("organization: ", organization);
+    // console.log("email: ", email);
+    // console.log("phone: ", phone);
   };
 
   return (
     <div className={styles.container}>
+      {isCover ? <div className={styles.cover}></div> : ""}
       <div className={styles.inner}>
         <div
           className={styles.closeButton}

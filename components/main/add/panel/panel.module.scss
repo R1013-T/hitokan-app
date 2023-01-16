@@ -19,6 +19,15 @@
   place-items: center;
   color: #444;
 
+  .cover {
+    width: 100%;
+    height: 100%;
+    background: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
   .inner {
     min-width: 60vw;
     min-height: 65dvh;

@@ -5,6 +5,7 @@ import Header from "~/publicParts/header/Top";
 import AddButton from "~/main/add/button/AddButton";
 import AddPanel from "~/main/add/panel/Panel";
 import { useState } from "react";
+import Head from "next/head";
 
 const main = () => {
   const router = useRouter();
@@ -22,6 +23,9 @@ const main = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Head>
+        <title>Hitokan</title>
+      </Head>
       <Header />
       <AddButton changeIsAdd={changeIsAdd} />
       {isAdd ? <AddPanel changeIsAdd={changeIsAdd} email={auth.currentUser?.email} /> : ""}

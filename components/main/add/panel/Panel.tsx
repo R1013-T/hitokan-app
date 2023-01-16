@@ -43,6 +43,7 @@ const Panel = (props: Props) => {
     // console.log("organization: ", organization);
     // console.log("email: ", email);
     // console.log("phone: ", phone);
+    props.changeIsAdd(false)
   };
 
   return (

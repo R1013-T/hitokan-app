@@ -25,24 +25,16 @@ const Panel = (props: Props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // const usersRef = collection(db, "users");
-
-    // await setDoc(doc(usersRef, "new"), {
-    //   name: "aaa",
-    // });
-
-    const user = auth.currentUser;
-
-    const usersCollectionRef = collection(db, "users", user!.uid, "peoples");
+    const usersCollectionRef = collection(db, "users", auth.currentUser!.uid, "peoples");
     setDoc(doc(usersCollectionRef), {
       name: "aaa",
       age: 20,
     });
 
-    const snapShots = await getDocs(usersCollectionRef);
-    snapShots.forEach((doc) => {
-      console.log(doc.id, doc.data());
-    });
+    // const snapShots = await getDocs(usersCollectionRef);
+    // snapShots.forEach((doc) => {
+    //   console.log(doc.id, doc.data());
+    // });
 
     // console.log("email: ", props.email);
     // console.log("name: ", name);

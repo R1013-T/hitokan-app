@@ -1,0 +1,47 @@
+.listWrapper {
+  width: 98%;
+  margin: 0 auto;
+}
+
+.container {
+  position: relative;
+  padding: 6px 0;
+  border: 2px solid rgba($color: #b9bdc0, $alpha: 1);
+  background: rgba($color: #b9bdc0, $alpha: 0.2);
+  margin: 6px 0;
+  height: 35px;
+  &:first-of-type {
+    margin-top: 12px;
+  }
+  
+  p {
+    margin: 0 3px 0 10px;
+    white-space: nowrap;
+  }
+  
+  .inner {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: calc(100% - 35px);
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .deleteButton {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 20px;
+    color: #f27272;
+    border-radius: 50%;
+  }
+}

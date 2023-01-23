@@ -2,3 +2,24 @@
   position: fixed;
   top: 6dvh;
 }
+
+.displayName {
+  position: fixed;
+  top: 1.5dvh;
+  right: 80px;
+  z-index: 50;
+  font-size: 15px;
+}
+
+.logoutButton{
+  position: fixed;
+  top: 1.5dvh;
+  right: 7px;
+  z-index: 50;
+  font-size: 12px;
+}
+
+.main {
+  width: 100vw;
+  min-height: 94dvh;;
+}

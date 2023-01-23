@@ -1,0 +1,37 @@
+.container {
+  width: 98vw;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  margin: 5px auto 0;
+  padding: 0 0 10px;
+  border-bottom: 2px solid #bbb;
+
+  .inner {
+    width: 100%;
+    margin-top: 6px;
+    padding: 8px 0;
+    font-size: 15px;
+    display: flex;
+    background: #e5eaee;
+
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    p {
+      margin: 0 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      white-space: nowrap;
+
+      span {
+        margin: 0 5px 0 0;
+      }
+    }
+  }
+}

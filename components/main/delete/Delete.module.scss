@@ -1,0 +1,49 @@
+.container {
+  position: fixed;
+  background: rgba($color: #fff, $alpha: 0.5);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+
+  .inner {
+    border: 3px solid #bbb;
+    border-radius: 3px;
+    color: #444;
+    width: min(70%, 300px);
+    background: #fff;
+
+    p {
+      font-size: 16px;
+      width: 100%;
+      text-align: center;
+      margin: 10px 0 20px;
+    }
+
+    .buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      margin: 10px 0 15px;
+
+      button {
+        width: 100px;
+        text-align: center;
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 3px;
+
+        &.ok {
+          color: #fff;
+          background: #f06f6f;
+        }
+        &.no {
+          border: #bbb 1px solid;
+        }
+      }
+    }
+  }
+}

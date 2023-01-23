@@ -1,15 +1,15 @@
 import styles from "./panel.module.scss";
 
 import { VscChromeClose } from "react-icons/vsc";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { auth, db } from "lib/firebase";
 import { v4 as uuidv4 } from "uuid";
 
 interface Props {
-  email: string;
   changeIsAdd: Function;
+  people: any;
 }
 
 const Panel = (props: Props) => {
@@ -22,28 +22,51 @@ const Panel = (props: Props) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
+  useEffect(()=> {
+    if (!props.people) return
+    setName(props.people.name)
+    setAge(props.people.age)
+    setBirth(props.people.birth)
+    setOrganization(props.people.organization)
+    setEmail(props.people.email)
+    setPhone(props.people.phone)
+  },[])
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsCover(true);
 
-    const usersCollectionRef = collection(db, "users", auth.currentUser!.uid, "peoples");
-    setDoc(doc(usersCollectionRef), {
-      name: "aaa",
-      age: 20,
+    if (props.people) {
+      await changeFirestore()
+    } else {
+      await addFirestore()
+    }
+
+    setIsCover(false);
+    props.changeIsAdd(false);
+  };
+
+  const addFirestore = async () => {
+    console.log('add')
+    const usersCollectionRef = collection(
+      db,
+      "users",
+      auth.currentUser!.uid,
+      "peoples"
+    );
+    console.log(usersCollectionRef)
+    await setDoc(doc(usersCollectionRef), {
+      name: name,
+      age: age,
+      birth: birth,
+      organization: organization,
+      email: email,
+      phone: phone,
     });
+  };
 
-    // const snapShots = await getDocs(usersCollectionRef);
-    // snapShots.forEach((doc) => {
-    //   console.log(doc.id, doc.data());
-    // });
-
-    // console.log("email: ", props.email);
-    // console.log("name: ", name);
-    // console.log("age: ", age);
-    // console.log("birth: ", birth);
-    // console.log("organization: ", organization);
-    // console.log("email: ", email);
-    // console.log("phone: ", phone);
-    props.changeIsAdd(false)
+  const changeFirestore = () => {
+    console.log('change')
   };
 
   return (
@@ -56,7 +79,7 @@ const Panel = (props: Props) => {
         >
           <VscChromeClose />
         </div>
-        <p>追加</p>
+        <p>{props.people ? "変更" : "追加"}</p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">name</label>
           <input

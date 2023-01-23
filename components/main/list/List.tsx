@@ -20,7 +20,6 @@ const List = (props: Props) => {
     setChangePeopleData(people);
   };
   useEffect(() => {
-    console.log(changePeopleData);
     setIsChange(true);
   }, [changePeopleData]);
 

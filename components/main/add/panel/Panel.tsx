@@ -22,24 +22,24 @@ const Panel = (props: Props) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
-  useEffect(()=> {
-    if (!props.people) return
-    setName(props.people.name)
-    setAge(props.people.age)
-    setBirth(props.people.birth)
-    setOrganization(props.people.organization)
-    setEmail(props.people.email)
-    setPhone(props.people.phone)
-  },[])
+  useEffect(() => {
+    if (!props.people) return;
+    setName(props.people.name);
+    setAge(props.people.age);
+    setBirth(props.people.birth);
+    setOrganization(props.people.organization);
+    setEmail(props.people.email);
+    setPhone(props.people.phone);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsCover(true);
 
     if (props.people) {
-      await changeFirestore()
+      await changeFirestore();
     } else {
-      await addFirestore()
+      await addFirestore();
     }
 
     setIsCover(false);
@@ -47,14 +47,13 @@ const Panel = (props: Props) => {
   };
 
   const addFirestore = async () => {
-    console.log('add')
     const usersCollectionRef = collection(
       db,
       "users",
       auth.currentUser!.uid,
       "peoples"
     );
-    console.log(usersCollectionRef)
+    console.log(usersCollectionRef);
     await setDoc(doc(usersCollectionRef), {
       name: name,
       age: age,
@@ -65,8 +64,18 @@ const Panel = (props: Props) => {
     });
   };
 
-  const changeFirestore = () => {
-    console.log('change')
+  const changeFirestore = async () => {
+    await setDoc(
+      doc(db, "users", auth.currentUser!.uid, "peoples", props.people.id),
+      {
+        name: name,
+        age: age,
+        birth: birth,
+        organization: organization,
+        email: email,
+        phone: phone,
+      }
+    );
   };
 
   return (

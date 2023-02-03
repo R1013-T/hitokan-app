@@ -1,11 +1,11 @@
-import styles from "./SignIn.module.scss";
+import styles from "./Signin.module.scss";
 
 interface Props {
   changeAuthState: Function;
 }
 
-const SignIn = (props: Props) => {
+const Signin = (props: Props) => {
   return <div>SignIn</div>;
 };
 
-export default SignIn;
+export default Signin;

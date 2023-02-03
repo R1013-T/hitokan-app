@@ -2,7 +2,7 @@ import Header from "~/Header";
 import styles from "../styles/Home.module.scss";
 import Auth from "~/auth/Top";
 import SignUp from "~/auth/signup/SignUp";
-// import SignIn from "~/auth/signin/Signin";
+import SignIn from "~/auth/signin/Signin";
 
 import { useState } from "react";
 
@@ -28,11 +28,11 @@ export default function Home() {
           ) : (
             ""
           )}
-          {/* {authState === "signin" ? (
+          {authState === "signin" ? (
             <SignIn changeAuthState={changeAuthState} />
           ) : (
             ""
-          )} */}
+          )}
         </main>
       </div>
     </div>

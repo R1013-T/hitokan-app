@@ -1,0 +1,11 @@
+.container {
+  position: absolute;
+  top: 5dvh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+
+  img {
+    width: min(40%, 200px);
+  }
+}

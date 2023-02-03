@@ -1,0 +1,40 @@
+@import "../styles/Variable.module.scss";
+
+.container {
+  background: $white_lv2;
+  width: 100%;
+  height: 20dvh;
+  min-height: 100px;
+  display: grid;
+  place-items: center;
+}
+
+.inner {
+  min-width: 75%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  img,
+  .space {
+    width: 44px;
+  }
+  p {
+    font-size: 46px;
+    font-weight: 400;
+    color: $black_lv2;
+    letter-spacing: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .inner {
+    min-width: 50%;
+    img,
+    .space {
+      width: 33px;
+    }
+    p {
+      font-size: 25px;
+    }
+  }
+}

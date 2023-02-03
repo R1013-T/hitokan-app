@@ -6,8 +6,6 @@ import Confirm from "./confirm/Confirm";
 import Loading from "~/Loading";
 
 import { useState } from "react";
-import { Head } from "next/document";
-
 interface Props {
   changeAuthState: Function;
 }

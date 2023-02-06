@@ -35,7 +35,16 @@
       }
       &:nth-of-type(3) {
         background-color: $white_lv1;
-        padding: 13px 0;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .google, .space {
+          font-size: 25px;
+          width: 30px;
+          margin: 0 20px;
+        }
 
         span {
           font-size: 14px;

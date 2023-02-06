@@ -13,6 +13,12 @@
     border: 1px solid blue;
     width: 500px;
     height: 100dvh;
+    display: grid;
+    place-items: center;
+
+    .topImage {
+      width: 95%;
+    }
   }
 
   .container {

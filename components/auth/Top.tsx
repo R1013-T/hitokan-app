@@ -1,6 +1,8 @@
 import styles from "./Top.module.scss";
 import CenterImage from "./CenterImage";
 
+import { FcGoogle } from "react-icons/fc";
+
 interface Props {
   changeAuthState: Function;
 }
@@ -18,7 +20,11 @@ const Top = (props: Props) => {
         </button>
         <div className={styles.or}>or</div>
         <button type="button">
-          Sign up with <span>Google</span>
+          <FcGoogle className={styles.google} />
+          <div>
+            Sign up with <span>Google</span>
+          </div>
+          <div className={styles.space}></div>
         </button>
       </div>
     </div>

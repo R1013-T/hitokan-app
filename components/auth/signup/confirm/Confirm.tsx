@@ -21,7 +21,7 @@ const Confirm = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      {authFlag ? <AfterAuth /> : <BeforeAuth changeSignUpState={props.changeSignUpState} email={props.email} />}
+      {authFlag ? <AfterAuth /> : <BeforeAuth changeSignUpState={props.changeSignUpState} email={props.email} changeIsLoading={props.changeIsLoading} />}
     </div>
   );
 };

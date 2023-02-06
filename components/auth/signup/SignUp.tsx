@@ -29,13 +29,13 @@ const SignUp = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      
       {isLoading ? <Loading /> : ""}
       <CenterImage />
       <main>
         <p className={styles.title}>CREATE YOUR ACCOUNT</p>
         {signUpState === "beforeAuthInput" ? (
           <BeforeAuthInput
+            email={email}
             changeEmail={changeEmail}
             changeSignUpState={changeSignUpState}
           />

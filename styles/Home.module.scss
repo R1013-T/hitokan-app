@@ -5,17 +5,33 @@
   width: 100vw;
   height: 100dvh;
   border: 1px solid;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .image {
+    border: 1px solid blue;
+    width: 500px;
+    height: 100dvh;
+  }
 
   .container {
     width: min(100%, 500px);
     height: min(100%);
 
     .main {
-      width: 100%;
+      width: 95%;
       height: 80dvh;
+      margin: 0 auto;
       overflow: scroll;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    .image {
+      display: none;
     }
   }
 }

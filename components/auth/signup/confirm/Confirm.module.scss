@@ -10,6 +10,25 @@
   height: 100%;
   position: relative;
 
+  p {
+    &.label {
+      font-size: 14px;
+      color: $black_lv2;
+    }
+    
+    &.center {
+      font-size: 24px;
+      color: $black_lv3;
+      text-align: center;
+      margin: 10px 0 0;
+      padding: 10px 0;
+      background-color: $white_lv3;
+      border: 1px solid $white_lv1;
+      border-radius: 2px;
+      letter-spacing: 1px;
+    }
+  }
+
   .buttons {
     position: absolute;
     bottom: 10px;
@@ -17,6 +36,7 @@
     display: flex;
     justify-content: space-around;
     button {
+      letter-spacing: 2px;
       display: block;
       width: 45%;
       padding: 12px 0;

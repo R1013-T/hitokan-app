@@ -15,6 +15,7 @@ export default function Home() {
 
   return (
     <div className={styles.wrapper}>
+      <div className={styles.image}></div>
       <div className={styles.container}>
         <Header />
         <main className={styles.main}>

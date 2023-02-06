@@ -18,6 +18,7 @@ export default function sendGmail(req: NextApiRequest, res: NextApiResponse) {
     html: `
       <p>ヒトカン 認証メール</p>
       <p>${req.body.id}</p>
+      <a href="https://hitokan-app.vercel.app/auth/${req.body.id}">クリック</a>
     `,
   };
 

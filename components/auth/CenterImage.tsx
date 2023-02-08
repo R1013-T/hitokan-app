@@ -1,9 +1,17 @@
-import styles from "./CenterImage.module.scss"
+import styles from "./CenterImage.module.scss";
 
-const CenterImage = () => {
+interface Props {
+  dir: number;
+}
+
+const CenterImage = (props: Props) => {
   return (
     <div className={styles.container}>
-      <img src="./images/hitokanIcon.svg" alt="" />
+      {props.dir === 1 ? (
+        <img src="./images/hitokanIcon.svg" alt="" />
+      ) : (
+        <img src="../images/hitokanIcon.svg" alt="" />
+      )}
     </div>
   );
 };

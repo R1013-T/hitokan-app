@@ -27,7 +27,12 @@ export default function Home() {
             ""
           )}
           {authState === "signup" ? (
-            <SignUp changeAuthState={changeAuthState} />
+            <SignUp
+              centerImageDir={1}
+              email=""
+              signUpState="beforeAuthInput"
+              changeAuthState={changeAuthState}
+            />
           ) : (
             ""
           )}

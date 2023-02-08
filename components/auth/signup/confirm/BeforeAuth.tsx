@@ -14,12 +14,11 @@ const BeforeAuth = (props: Props) => {
   const handleSendClick = async () => {
     props.changeIsLoading(true);
     const id = uuidv4();
+    const authUrl = `${location.href}/auth/${id}`;
 
     await setFirestore(id);
 
-    handleAuthMailSend(id);
-
-    console.log("ok");
+    handleAuthMailSend(id, authUrl);
   };
 
   const setFirestore = async (id: string) => {
@@ -28,10 +27,11 @@ const BeforeAuth = (props: Props) => {
     });
   };
 
-  const handleAuthMailSend = async (id: string) => {
+  const handleAuthMailSend = async (id: string, authUrl: string) => {
     const mailData = {
       email: props.email,
       id: id,
+      url: authUrl,
     };
 
     await fetch("/api/authMail", {
@@ -51,7 +51,7 @@ const BeforeAuth = (props: Props) => {
   };
 
   return (
-    <div className={styles.beforeWrap}>
+    <div className={styles.container}>
       <p className={styles.label}>
         以下のメールアドレスに認証メールを送信します。
       </p>

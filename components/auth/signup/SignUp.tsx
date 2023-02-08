@@ -7,11 +7,14 @@ import Loading from "~/Loading";
 
 import { useState } from "react";
 interface Props {
+  centerImageDir: number;
+  email: string;
+  signUpState: string;
   changeAuthState: Function;
 }
 
 const SignUp = (props: Props) => {
-  const [signUpState, setSignUpState] = useState("beforeAuthInput");
+  const [signUpState, setSignUpState] = useState(props.signUpState);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +33,7 @@ const SignUp = (props: Props) => {
   return (
     <div className={styles.container}>
       {isLoading ? <Loading /> : ""}
-      <CenterImage />
+      <CenterImage dir={props.centerImageDir} />
       <main>
         <p className={styles.title}>CREATE YOUR ACCOUNT</p>
         {signUpState === "beforeAuthInput" ? (
@@ -42,7 +45,11 @@ const SignUp = (props: Props) => {
         ) : (
           ""
         )}
-        {signUpState === "AfterAuthInput" ? <AfterAuthInput /> : ""}
+        {signUpState === "AfterAuthInput" ? (
+          <AfterAuthInput email={email} />
+        ) : (
+          ""
+        )}
         {signUpState === "confirm" ? (
           <Confirm
             email={email}
@@ -54,12 +61,16 @@ const SignUp = (props: Props) => {
         ) : (
           ""
         )}
-        <button
-          className={styles.changeSignIn}
-          onClick={() => props.changeAuthState("signin")}
-        >
-          Already have your account?
-        </button>
+        {signUpState === "beforeAuthInput" ? (
+          <button
+            className={styles.changeSignIn}
+            onClick={() => props.changeAuthState("signin")}
+          >
+            Already have your account?
+          </button>
+        ) : (
+          ""
+        )}
       </main>
     </div>
   );

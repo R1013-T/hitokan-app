@@ -10,7 +10,7 @@ interface Props {
 const Top = (props: Props) => {
   return (
     <div className={styles.container}>
-      <CenterImage />
+      <CenterImage dir={1} />
       <div className={styles.buttonsWrap}>
         <button type="button" onClick={() => props.changeAuthState("signup")}>
           Sign up

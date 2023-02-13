@@ -34,8 +34,8 @@
       width: 100%;
       border: 1px solid $black_lv1;
       border-radius: 3px;
-      font-size: 18px;
-      padding: 8px 6px;
+      font-size: 16px;
+      padding: 9px 6px;
       background: $white_lv3;
       outline: none;
       color: $black_lv2;
@@ -49,20 +49,89 @@
 
     button {
       position: absolute;
-      bottom: 15px;
+      bottom: 0;
+      right: 0;
       display: block;
       width: 100%;
-      border-radius: 4px;
+      border-radius: 3px;
       background: $theme;
       color: $white_lv3;
       text-align: center;
       padding: 12px;
       font-size: 15px;
+      letter-spacing: 3px;
+
+      &.continue {
+        width: 52%;
+      }
+
+      &.backButton {
+        width: 45%;
+        bottom: 0;
+        left: 0;
+        font-size: 13px;
+        border: 1px solid $black_lv1;
+        color: $black_lv2;
+        background: $white_lv2;
+
+        &.hidden {
+          opacity: 0.2;
+        }
+      }
 
       &.ng {
         opacity: 0.5;
       }
+
+      .back {
+        margin-right: 10px;
+      }
+
+      .next {
+        margin-left: 10px;
+        transform: rotate(180deg);
+      }
     }
+
+    &.after {
+      .inner {
+        &.next {
+          animation: next 0.5s forwards ease-in-out;
+        }
+        &.back {
+          animation: back 0.5s forwards ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@keyframes next {
+  0% {
+    transform: translateX(0%);
+  }
+  20% {
+    transform: translateX(-100%);
+  }
+  21% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes back {
+  0% {
+    transform: translateX(0%);
+  }
+  20% {
+    transform: translateX(100%);
+  }
+  21% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
   }
 }
 

@@ -4,29 +4,16 @@
   background: $white_lv2;
   width: 100vw;
   height: 100dvh;
-  border: 1px solid;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  .image {
-    width: 50vw;
-    height: 100dvh;
-    display: grid;
-    place-items: center;
-
-    .topImage {
-      width: 95%;
-    }
-  }
+  display: grid;
+  place-items: center;
 
   .container {
     width: min(100%, 500px);
-    height: min(100%);
+    height: min(90%);
 
     .main {
       width: 95%;
-      height: 80dvh;
+      height: 80%;
       margin: 0 auto;
       overflow: scroll;
     }
@@ -35,8 +22,8 @@
 
 @media (max-width: 900px) {
   .wrapper {
-    .image {
-      display: none;
+    .container {
+      height: 100%;
     }
   }
 }

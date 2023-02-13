@@ -26,8 +26,15 @@ const SignUp = (props: Props) => {
   const changeIsLoading = (state: boolean) => {
     setIsLoading(state);
   };
+
   const changeEmail = (email: string) => {
     setEmail(email);
+  };
+  const changePassword = (password: string) => {
+    setPassword(password);
+  };
+  const changeUserName = (userName: string) => {
+    setUserName(userName);
   };
 
   return (
@@ -46,7 +53,11 @@ const SignUp = (props: Props) => {
           ""
         )}
         {signUpState === "AfterAuthInput" ? (
-          <AfterAuthInput email={email} />
+          <AfterAuthInput
+            changeSignUpState={changeSignUpState}
+            changePassword={changePassword}
+            changeUserName={changeUserName}
+          />
         ) : (
           ""
         )}

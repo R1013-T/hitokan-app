@@ -25,7 +25,7 @@
     }
 
     &.center {
-      font-size: 24px;
+      font-size: 20px;
       color: $black_lv3;
       text-align: center;
       margin: 10px 0 0;
@@ -39,7 +39,7 @@
 
   .buttons {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     width: 100%;
     display: flex;
     justify-content: space-around;

@@ -16,7 +16,7 @@ interface Props {
 const SignUp = (props: Props) => {
   const [signUpState, setSignUpState] = useState(props.signUpState);
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(props.email);
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
 

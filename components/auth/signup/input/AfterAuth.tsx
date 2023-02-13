@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "./Input.module.scss";
 
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 interface Props {
   changeSignUpState: Function;
@@ -27,19 +28,23 @@ const AfterAuth = (props: Props) => {
   const handleNext = () => {
     if (ngFlag) return;
     move("next");
+    setInputValue("");
     switch (inputState) {
       case "password":
+        setPassword(inputValue);
         setInputState("passwordConfirm");
         break;
       case "passwordConfirm":
         setInputState("userName");
         break;
       case "userName":
+        setUserName(inputValue);
         break;
     }
   };
   const handleBack = () => {
     move("back");
+    setInputValue("");
     switch (inputState) {
       case "password":
         break;
@@ -52,8 +57,14 @@ const AfterAuth = (props: Props) => {
     }
   };
 
+  useEffect(() => {
+    if (!userName) return;
+    props.changePassword(password);
+    props.changeUserName(userName);
+    props.changeSignUpState("confirm");
+  }, [userName]);
+
   const checkPassword = (password: string) => {
-    console.log(password);
     setNgFlag(true);
     const okRegex = /^(?=\d{0,99}[a-z])(?=[a-z]{0,99}\d)[a-z\d]{8,100}$/i;
     const numRegex = /[0-9]/;
@@ -65,7 +76,7 @@ const AfterAuth = (props: Props) => {
       setNgMsg("８文字以上入力してください。");
     } else if (okRegex.test(password)) {
       setNgFlag(false);
-      setNgMsg("ok");
+      setNgMsg("");
     } else if (!AtZRegex.test(password)) {
       setNgMsg("大文字 を一文字以上入力してください。");
     } else if (!atzRegex.test(password)) {
@@ -77,11 +88,30 @@ const AfterAuth = (props: Props) => {
     }
   };
 
-  const checkPasswordConfirm = (passwordConfirm: string) => {};
+  const checkPasswordConfirm = (passwordConfirm: string) => {
+    setNgFlag(true);
+    if (!passwordConfirm) {
+      setNgMsg("パスワード（確認）を入力してください。");
+    } else if (password != passwordConfirm) {
+      setNgMsg("パスワードと一致しません。");
+    } else {
+      setNgFlag(false);
+      setNgMsg("");
+    }
+  };
 
-  const checkUserName = (userName: string) => {};
+  const checkUserName = (userName: string) => {
+    setNgFlag(true);
+    if (!userName) {
+      setNgMsg("ユーザーネームを入力してください。");
+    } else {
+      setNgFlag(false);
+      setNgMsg("");
+    }
+  };
 
   const move = (move: string) => {
+    setNgFlag(true);
     switch (move) {
       case "back":
         if (inputState === "password") return;
@@ -94,7 +124,6 @@ const AfterAuth = (props: Props) => {
     }
     setTimeout(() => {
       setInputMove("");
-      setNgFlag(true);
     }, 500);
   };
 
@@ -132,25 +161,46 @@ const AfterAuth = (props: Props) => {
     }
   }, [inputState]);
 
+  const handleChangeInputType = () => {
+    if (inputType === "text") {
+      setInputType("password");
+    } else {
+      setInputType("text");
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleNext();
+  };
+
   return (
     <div className={styles.container}>
-      <form className={styles.after}>
+      <form className={styles.after} onSubmit={handleSubmit}>
+        <p>{inputLabel}を入力してください。</p>
         <div
           className={`${styles.inner} ${
             inputMove === "next" ? styles.next : ""
           } ${inputMove === "back" ? styles.back : ""}`}
         >
-          <p>{inputLabel}を入力してください。</p>
-
           <label htmlFor="input">{inputLabel}</label>
-          <input
-            id="input"
-            type={inputType}
-            placeholder={inputPlaceholder}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.currentTarget.value)}
-            autoComplete="off"
-          />
+          <div className={styles.inputWrap}>
+            <input
+              id="input"
+              type={inputType}
+              placeholder={inputPlaceholder}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.currentTarget.value)}
+              autoComplete="off"
+            />
+            {inputState === "passwordConfirm" ? (
+              <div className={styles.eye} onClick={handleChangeInputType}>
+                {inputType === "password" ? <VscEye /> : <VscEyeClosed />}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
           <p className={styles.attention}>{ngMsg}</p>
         </div>
 
@@ -165,9 +215,8 @@ const AfterAuth = (props: Props) => {
           Back
         </button>
         <button
-          type="button"
+          type="submit"
           className={`${styles.continue} ${ngFlag ? styles.ng : ""}`}
-          onClick={handleNext}
         >
           Next
           <MdOutlineArrowBackIosNew className={styles.next} />

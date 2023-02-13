@@ -12,16 +12,29 @@ interface Props {
 }
 
 const Confirm = (props: Props) => {
-  const [authFlag, setAuthFlag] = useState(false)
+  const [authFlag, setAuthFlag] = useState(false);
 
   useEffect(() => {
-    if (props.password) setAuthFlag(true)
-    
-  },[])
+    if (props.password) setAuthFlag(true);
+  }, []);
 
   return (
     <div className={styles.container}>
-      {authFlag ? <AfterAuth /> : <BeforeAuth changeSignUpState={props.changeSignUpState} email={props.email} changeIsLoading={props.changeIsLoading} />}
+      {authFlag ? (
+        <AfterAuth
+          email={props.email}
+          password={props.password}
+          userName={props.userName}
+          changeSignUpState={props.changeSignUpState}
+          changeIsLoading={props.changeIsLoading}
+        />
+      ) : (
+        <BeforeAuth
+          changeSignUpState={props.changeSignUpState}
+          email={props.email}
+          changeIsLoading={props.changeIsLoading}
+        />
+      )}
     </div>
   );
 };

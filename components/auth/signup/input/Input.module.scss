@@ -95,6 +95,31 @@
 
     &.after {
       .inner {
+        .inputWrap {
+          position: relative;
+
+          input {
+            top: 0;
+            left: 0;
+            position: absolute;
+          }
+
+          .eye {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            width: 40px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            font-size: 23px;
+          }
+        }
+
+        .attention {
+          margin-top: 50px;
+        } 
+
         &.next {
           animation: next 0.5s forwards ease-in-out;
         }

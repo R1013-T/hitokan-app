@@ -12,6 +12,12 @@
     bottom: 12dvh;
     color: $black_lv3;
 
+    &.confirm {
+      height: 75dvh;
+      top: 0dvh;
+      bottom: auto;
+    }
+
     .title {
       line-height: 1;
       font-size: 27px;

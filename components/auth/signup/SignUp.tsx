@@ -41,7 +41,7 @@ const SignUp = (props: Props) => {
     <div className={styles.container}>
       {isLoading ? <Loading /> : ""}
       <CenterImage dir={props.centerImageDir} />
-      <main>
+      <main className={`${signUpState === "confirm" ? styles.confirm : ""}`}>
         <p className={styles.title}>CREATE TO YOUR ACCOUNT</p>
         {signUpState === "beforeAuthInput" ? (
           <BeforeAuthInput

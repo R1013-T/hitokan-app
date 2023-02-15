@@ -36,15 +36,15 @@ const AfterAuth = (props: Props) => {
   
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${styles.after}`}>
       <form onSubmit={handleSubmit}>
         <label>UserName</label>
-        <input type="text" value={props.userName} disabled />
+        <input type="text" value={props.userName} readOnly />
         <label>Email Address</label>
-        <input type="text" value={props.email} disabled />
+        <input type="text" value={props.email} readOnly />
         <label>Password</label>
         <div className={styles.passWrap}>
-          <input type={inputType} value={props.password} disabled />
+          <input type={inputType} value={props.password} readOnly />
           <div className={styles.eye} onClick={handleClickEye}>
             {isPasswordHidden ? <VscEye /> : <VscEyeClosed />}
           </div>

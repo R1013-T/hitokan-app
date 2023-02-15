@@ -109,25 +109,8 @@
 
 @media (max-width: 350px) {
   .container {
-    form {
-      label {
-        font-size: 12px;
-      }
-
-      input {
-        padding: 4px 2px;
-        font-size: 15px;
-        margin: 3px 0 10px;
-      }
-    }
-
     .buttons {
-      bottom: 0px;
-
-      button {
-        padding: 8px 0;
-        font-size: 11px;
-      }
+      bottom: 30px;
     }
   }
 }

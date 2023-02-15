@@ -31,7 +31,7 @@
       font-size: 20px;
       margin: 3px 0 10px;
       color: $black_lv3;
-      background: $white_lv3;
+      background: rgba($color: $white_lv3, $alpha: 0.7);
       letter-spacing: 1px;
     }
 
@@ -69,7 +69,7 @@
       text-align: center;
       margin: 10px 0 0;
       padding: 10px 0;
-      background-color: $white_lv3;
+      background: rgba($color: $white_lv3, $alpha: 0.7);
       border: 1px solid $white_lv1;
       border-radius: 2px;
       letter-spacing: 1px;

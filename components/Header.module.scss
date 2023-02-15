@@ -14,15 +14,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  img,
-  .space {
-    width: 44px;
-  }
-  p {
-    font-size: 46px;
-    font-weight: 400;
-    color: $black_lv2;
-    letter-spacing: 12px;
+  .logo {
+    width: 50%;
   }
 }
 

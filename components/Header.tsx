@@ -5,7 +5,7 @@ const Header = () => {
     <div className={styles.container}>
       <div className={styles.inner}>
         {/* <img src="./images/icon.svg" alt="icon" /> */}
-        <p>ヒトカン</p>
+        <img src="../images/logo.png" alt="" className={styles.logo} />
         {/* <div className={styles.space}></div> */}
       </div>
     </div>

@@ -42,7 +42,7 @@ const SignUp = (props: Props) => {
       {isLoading ? <Loading /> : ""}
       <CenterImage dir={props.centerImageDir} />
       <main>
-        <p className={styles.title}>CREATE YOUR ACCOUNT</p>
+        <p className={styles.title}>CREATE TO YOUR ACCOUNT</p>
         {signUpState === "beforeAuthInput" ? (
           <BeforeAuthInput
             email={email}

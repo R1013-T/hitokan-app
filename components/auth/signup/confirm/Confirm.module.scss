@@ -18,6 +18,45 @@
   height: 100%;
   position: relative;
 
+  form {
+    label {
+      display: block;
+      font-size: 14px;
+      color: $black_lv1;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 5px;
+      font-size: 20px;
+      margin: 3px 0 10px;
+      color: $black_lv3;
+      background: $white_lv3;
+      letter-spacing: 1px;
+    }
+
+    .passWrap {
+      position: relative;
+
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .eye {
+        position: absolute;
+        top: 6.5px;
+        right: 5px;
+        width: 40px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        font-size: 23px;
+      }
+    }
+  }
+
   p {
     &.label {
       font-size: 14px;
@@ -66,4 +105,29 @@
 
 .authEmailWrap {
   position: relative;
+}
+
+@media (max-width: 350px) {
+  .container {
+    form {
+      label {
+        font-size: 12px;
+      }
+
+      input {
+        padding: 4px 2px;
+        font-size: 15px;
+        margin: 3px 0 10px;
+      }
+    }
+
+    .buttons {
+      bottom: 0px;
+
+      button {
+        padding: 8px 0;
+        font-size: 11px;
+      }
+    }
+  }
 }

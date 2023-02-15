@@ -1,4 +1,8 @@
-import { useEffect } from "react";
+import styles from "./Confirm.module.scss";
+
+import { useEffect, useState } from "react";
+
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 interface Props {
   email: string;
@@ -9,16 +13,54 @@ interface Props {
 }
 
 const AfterAuth = (props: Props) => {
+  const [inputType, seInputType] = useState("password");
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log("s");
+  };
+
+  const handleClickEye = () => {
+    setIsPasswordHidden((prevState) => !prevState);
+  };
 
   useEffect(() => {
-    console.log(props.email)
-  },[])
+    if (isPasswordHidden) {
+      seInputType("password")
+    } else {
+      seInputType("text")
+    }
+  }, [isPasswordHidden])
+  
 
   return (
-    <div>
-      <p>Email: {props.email}</p>
-      <p>Password: {props.password}</p>
-      <p>UserName: {props.userName}</p>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit}>
+        <label>UserName</label>
+        <input type="text" value={props.userName} disabled />
+        <label>Email Address</label>
+        <input type="text" value={props.email} disabled />
+        <label>Password</label>
+        <div className={styles.passWrap}>
+          <input type={inputType} value={props.password} disabled />
+          <div className={styles.eye} onClick={handleClickEye}>
+            {isPasswordHidden ? <VscEye /> : <VscEyeClosed />}
+          </div>
+        </div>
+        <div className={styles.buttons}>
+          <button
+            className={styles.ng}
+            onClick={() => props.changeSignUpState("AfterAuthInput")}
+          >
+            Edit
+          </button>
+          <button type="submit" className={styles.ok}>
+            Register
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

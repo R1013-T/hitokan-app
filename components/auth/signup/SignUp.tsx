@@ -6,6 +6,7 @@ import Confirm from "./confirm/Confirm";
 import Loading from "~/Loading";
 
 import { useState } from "react";
+import Head from "next/head";
 interface Props {
   centerImageDir: number;
   email: string;
@@ -15,7 +16,11 @@ interface Props {
 
 const SignUp = (props: Props) => {
   const [signUpState, setSignUpState] = useState(props.signUpState);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({
+    state: false,
+    text: "",
+    compleat: true,
+  });
   const [email, setEmail] = useState(props.email);
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
@@ -23,8 +28,12 @@ const SignUp = (props: Props) => {
   const changeSignUpState = (state: string) => {
     setSignUpState(state);
   };
-  const changeIsLoading = (state: boolean) => {
-    setIsLoading(state);
+  const changeIsLoading = (state: boolean, text: string, compleat: boolean) => {
+    setIsLoading({
+      state: state,
+      text: text,
+      compleat: compleat,
+    });
   };
 
   const changeEmail = (email: string) => {
@@ -39,7 +48,14 @@ const SignUp = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      {isLoading ? <Loading /> : ""}
+      <Head>
+        <title>Sign up to HITOKAN</title>
+      </Head>
+      {isLoading.state ? (
+        <Loading text={isLoading.text} compleat={isLoading.compleat} />
+      ) : (
+        ""
+      )}
       <CenterImage dir={props.centerImageDir} />
       <main className={`${signUpState === "confirm" ? styles.confirm : ""}`}>
         <p className={styles.title}>CREATE TO YOUR ACCOUNT</p>

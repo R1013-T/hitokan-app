@@ -3,6 +3,7 @@ import styles from "./Confirm.module.scss";
 import { v4 as uuidv4 } from "uuid";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "lib/firebase";
+import { useState } from "react";
 
 interface Props {
   email: string;
@@ -12,11 +13,18 @@ interface Props {
 
 const BeforeAuth = (props: Props) => {
   const handleSendClick = async () => {
-    props.changeIsLoading(true);
+    props.changeIsLoading(true,"メールアドレスを確認中です",false);
+
+    // ! ② メールアドレス チェック
+
+    props.changeIsLoading(true,"認証メールを送信中です",false);
+
     const id = uuidv4();
     const authUrl = `${location.href}/auth/${id}`;
 
     await setFirestore(id);
+
+    props.changeIsLoading(true,"認証メールを送信しました",true);
 
     handleAuthMailSend(id, authUrl);
   };
@@ -42,12 +50,6 @@ const BeforeAuth = (props: Props) => {
       },
       body: JSON.stringify(mailData),
     });
-    // .then((res) => {
-    //   console.log("mailsend")
-    // })
-    // .catch((err) => {
-    //   console.log("MailSendErr:", err);
-    // });
   };
 
   return (

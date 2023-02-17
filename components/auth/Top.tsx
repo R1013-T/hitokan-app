@@ -2,7 +2,7 @@ import styles from "./Top.module.scss";
 import CenterImage from "./CenterImage";
 
 import { FcGoogle } from "react-icons/fc";
-
+import Head from "next/head";
 interface Props {
   changeAuthState: Function;
 }
@@ -10,6 +10,9 @@ interface Props {
 const Top = (props: Props) => {
   return (
     <div className={styles.container}>
+      <Head>
+        <title>HITOKAN</title>
+      </Head>
       <CenterImage dir={1} />
       <div className={styles.buttonsWrap}>
         <button type="button" onClick={() => props.changeAuthState("signup")}>

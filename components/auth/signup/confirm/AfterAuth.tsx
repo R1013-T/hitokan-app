@@ -3,6 +3,9 @@ import styles from "./Confirm.module.scss";
 import { useEffect, useState } from "react";
 
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "lib/firebase";
+import { useRouter } from "next/router";
 
 interface Props {
   email: string;
@@ -13,13 +16,46 @@ interface Props {
 }
 
 const AfterAuth = (props: Props) => {
+  const router = useRouter();
+
   const [inputType, seInputType] = useState("password");
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("s");
+    props.changeIsLoading(true, "ユーザー情報を登録中です", false);
+    await registerUser();
+    await addUserFirestore();
+    props.changeIsLoading(false, "", false);
+  };
+
+  const registerUser = async () => {
+    await createUserWithEmailAndPassword(auth, props.email, props.password)
+      .then(() => {
+        const user = auth.currentUser;
+        if (!user) return;
+        updateProfile(user, {
+          displayName: props.userName,
+        }).then(() => {
+          router.push("/main/View");
+        });
+      })
+      .catch((err) => {
+        let errMsg = "";
+        switch (err.code) {
+          case "auth/email-already-in-use":
+            errMsg = "このメールアドレスすでに使用されています。";
+            break;
+          default:
+            errMsg = "登録できません。エラーが発生しました。";
+        }
+        alert(errMsg);
+      });
+  };
+
+  const addUserFirestore = async () => {
+    // ! ① userコレクションに追加
   };
 
   const handleClickEye = () => {
@@ -28,12 +64,11 @@ const AfterAuth = (props: Props) => {
 
   useEffect(() => {
     if (isPasswordHidden) {
-      seInputType("password")
+      seInputType("password");
     } else {
-      seInputType("text")
+      seInputType("text");
     }
-  }, [isPasswordHidden])
-  
+  }, [isPasswordHidden]);
 
   return (
     <div className={`${styles.container} ${styles.after}`}>

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const noPageJump = () => {
+const PageJump = () => {
   const router = useRouter()
 
   useEffect(() => {
@@ -11,4 +11,4 @@ const noPageJump = () => {
   return <div></div>;
 };
 
-export default noPageJump;
+export default PageJump;

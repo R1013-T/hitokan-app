@@ -3,11 +3,26 @@ import CenterImage from "./CenterImage";
 
 import { FcGoogle } from "react-icons/fc";
 import Head from "next/head";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+} from "firebase/auth";
+import { auth } from "lib/firebase";
 interface Props {
   changeAuthState: Function;
 }
 
 const Top = (props: Props) => {
+  const GoogleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    if (window.outerWidth <= 500) {
+      signInWithPopup(auth, provider);
+    } else {
+      signInWithRedirect(auth, provider);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -22,7 +37,7 @@ const Top = (props: Props) => {
           Log in
         </button>
         <div className={styles.or}>or</div>
-        <button type="button">
+        <button type="button" onClick={GoogleSignIn}>
           <FcGoogle className={styles.google} />
           <div>
             Sign up with <span>Google</span>

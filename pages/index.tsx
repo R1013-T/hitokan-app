@@ -5,12 +5,13 @@ import SignUp from "~/auth/signup/SignUp";
 import SignIn from "~/auth/signin/SignIn";
 
 import { useEffect, useState } from "react";
-import Head from "next/head";
-import { auth } from "lib/firebase";
 import { useRouter } from "next/router";
 
+import { auth } from "lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
 
   const [authState, setAuthState] = useState("top");
 
@@ -19,8 +20,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const user = auth.currentUser;
-    if (user) router.push("/main/View");
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push("/main/View");
+      }
+    });
   }, []);
 
   return (
@@ -43,7 +47,13 @@ export default function Home() {
           ) : (
             ""
           )}
-          {authState === "signin" ? <SignIn /> : ""}
+          {authState === "signin" ? (
+            <SignIn
+              changeAuthState={changeAuthState}
+            />
+          ) : (
+            ""
+          )}
         </main>
       </div>
     </div>

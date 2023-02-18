@@ -84,6 +84,7 @@ const SignUp = (props: Props) => {
             userName={userName}
             changeIsLoading={changeIsLoading}
             changeSignUpState={changeSignUpState}
+            changeAuthState={props.changeAuthState}
           />
         ) : (
           ""

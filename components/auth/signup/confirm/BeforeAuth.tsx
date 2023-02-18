@@ -1,7 +1,7 @@
 import styles from "./Confirm.module.scss";
 
 import { v4 as uuidv4 } from "uuid";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "lib/firebase";
 import { useState } from "react";
 
@@ -9,13 +9,14 @@ interface Props {
   email: string;
   changeSignUpState: Function;
   changeIsLoading: Function;
+  changeAuthState: Function;
 }
 
 const BeforeAuth = (props: Props) => {
   const handleSendClick = async () => {
     props.changeIsLoading(true,"メールアドレスを確認中です",false);
 
-    // ! ② メールアドレス チェック
+    await alreadyCheckEmail();
 
     props.changeIsLoading(true,"認証メールを送信中です",false);
 
@@ -27,6 +28,17 @@ const BeforeAuth = (props: Props) => {
     props.changeIsLoading(true,"認証メールを送信しました",true);
 
     handleAuthMailSend(id, authUrl);
+  };
+
+  const alreadyCheckEmail = async () => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      if (doc.data().email === props.email) {
+        alert("すでに登録済みをメールアドレスです。")
+        document.cookie = `email=${props.email}; max-age=60`
+        props.changeAuthState("signin")
+      }
+    });
   };
 
   const setFirestore = async (id: string) => {

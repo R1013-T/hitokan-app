@@ -9,6 +9,7 @@ interface Props {
   userName: string;
   changeIsLoading: Function;
   changeSignUpState: Function;
+  changeAuthState: Function;
 }
 
 const Confirm = (props: Props) => {
@@ -33,6 +34,7 @@ const Confirm = (props: Props) => {
           changeSignUpState={props.changeSignUpState}
           email={props.email}
           changeIsLoading={props.changeIsLoading}
+          changeAuthState={props.changeAuthState}
         />
       )}
     </div>

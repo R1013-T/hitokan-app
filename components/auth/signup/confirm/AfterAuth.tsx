@@ -3,9 +3,14 @@ import styles from "./Confirm.module.scss";
 import { useEffect, useState } from "react";
 
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "lib/firebase";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  User,
+} from "firebase/auth";
+import { auth, db } from "lib/firebase";
 import { useRouter } from "next/router";
+import { doc, setDoc } from "firebase/firestore";
 
 interface Props {
   email: string;
@@ -26,7 +31,6 @@ const AfterAuth = (props: Props) => {
 
     props.changeIsLoading(true, "ユーザー情報を登録中です", false);
     await registerUser();
-    await addUserFirestore();
     props.changeIsLoading(false, "", false);
   };
 
@@ -38,7 +42,7 @@ const AfterAuth = (props: Props) => {
         updateProfile(user, {
           displayName: props.userName,
         }).then(() => {
-          router.push("/main/View");
+          addUserFirestore(user);
         });
       })
       .catch((err) => {
@@ -54,8 +58,15 @@ const AfterAuth = (props: Props) => {
       });
   };
 
-  const addUserFirestore = async () => {
-    // ! ① userコレクションに追加
+  const addUserFirestore = async (user: User) => {
+    await setDoc(doc(db, "users", user.uid), {
+      email: props.email,
+      password: props.password,
+      staySignIn: false,
+      showAgain: true,
+    });
+
+    router.push("/main/View");
   };
 
   const handleClickEye = () => {

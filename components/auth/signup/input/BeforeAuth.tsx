@@ -47,6 +47,7 @@ const BeforeAuth = (props: Props) => {
           placeholder="Email Address"
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
+          autoComplete="email"
         />
         <p className={styles.attention}>{ngMsg}</p>
         <button type="submit" className={`${ngFlag ? styles.ng : ""}`}>

@@ -96,6 +96,7 @@ const Input = (props: Props) => {
           onChange={(e) => {
             setEmail(e.currentTarget.value);
           }}
+          autoComplete="email"
         />
         <label htmlFor="password">パスワード</label>
         <input
@@ -103,6 +104,7 @@ const Input = (props: Props) => {
           type="text"
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
+          autoComplete="off"
         />
         <p className={styles.attention}>{attention}</p>
         <button

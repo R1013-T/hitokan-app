@@ -15,7 +15,6 @@ const View = () => {
       if (user) {
         setUser(user);
       } else {
-        alert("ログインしてください")
         router.push("/");
       }
     });

@@ -9,18 +9,18 @@ import {
   signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "lib/firebase";
+import { useRouter } from "next/router";
 interface Props {
   changeAuthState: Function;
 }
 
 const Top = (props: Props) => {
+  const router = useRouter()
+
   const GoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    if (window.outerWidth <= 500) {
-      signInWithPopup(auth, provider);
-    } else {
-      signInWithRedirect(auth, provider);
-    }
+    signInWithRedirect(auth, provider);
+    router.push('/main/View')
   };
 
   return (

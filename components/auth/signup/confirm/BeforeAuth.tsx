@@ -42,7 +42,7 @@ const BeforeAuth = (props: Props) => {
     querySnapshot.forEach((doc) => {
       if (doc.data().email === props.email) {
         alreadyFlag = true;
-        alert("すでに登録済みをメールアドレスです。");
+        alert("すでに登録済みをメールアドレスです。ログインしてください。");
         document.cookie = `email=${props.email}; max-age=60`;
         props.changeAuthState("signin");
       }

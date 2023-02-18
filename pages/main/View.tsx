@@ -39,7 +39,7 @@ const View = () => {
       {/* {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""} */}
       <p>{user?.email}</p>
       <p>{user?.displayName}</p>
-      {/* <button onClick={() => signOut(auth)} >Sign Out</button> */}
+      <button onClick={() => signOut(auth)} >Sign Out</button>
     </div>
   );
 };

@@ -49,12 +49,14 @@ const AfterAuth = (props: Props) => {
         let errMsg = "";
         switch (err.code) {
           case "auth/email-already-in-use":
-            errMsg = "このメールアドレスすでに使用されています。";
+            errMsg = "このメールアドレスはすでに使用されています。ログインしてください。";
+            alert(errMsg);
+            router.push('/')
             break;
           default:
             errMsg = "登録できません。エラーが発生しました。";
+            alert(errMsg);
         }
-        alert(errMsg);
       });
   };
 
@@ -62,6 +64,7 @@ const AfterAuth = (props: Props) => {
     await setDoc(doc(db, "users", user.uid), {
       email: props.email,
       password: props.password,
+      createdAt: new Date(),
       staySignIn: false,
       showAgain: true,
     });

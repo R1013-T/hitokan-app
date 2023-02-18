@@ -1,10 +1,15 @@
 import styles from "./Confirm.module.scss";
 
 import { v4 as uuidv4 } from "uuid";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { db } from "lib/firebase";
 import { useState } from "react";
-
 interface Props {
   email: string;
   changeSignUpState: Function;
@@ -13,19 +18,21 @@ interface Props {
 }
 
 const BeforeAuth = (props: Props) => {
+  let alreadyFlag = false;
   const handleSendClick = async () => {
-    props.changeIsLoading(true,"メールアドレスを確認中です",false);
+    props.changeIsLoading(true, "メールアドレスを確認中です", false);
 
     await alreadyCheckEmail();
+    if (alreadyFlag) return;
 
-    props.changeIsLoading(true,"認証メールを送信中です",false);
+    props.changeIsLoading(true, "認証メールを送信中です", false);
 
     const id = uuidv4();
     const authUrl = `${location.href}/auth/${id}`;
 
     await setFirestore(id);
 
-    props.changeIsLoading(true,"認証メールを送信しました",true);
+    props.changeIsLoading(true, "認証メールを送信しました", true);
 
     handleAuthMailSend(id, authUrl);
   };
@@ -34,9 +41,10 @@ const BeforeAuth = (props: Props) => {
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
       if (doc.data().email === props.email) {
-        alert("すでに登録済みをメールアドレスです。")
-        document.cookie = `email=${props.email}; max-age=60`
-        props.changeAuthState("signin")
+        alreadyFlag = true;
+        alert("すでに登録済みをメールアドレスです。");
+        document.cookie = `email=${props.email}; max-age=60`;
+        props.changeAuthState("signin");
       }
     });
   };
@@ -44,6 +52,7 @@ const BeforeAuth = (props: Props) => {
   const setFirestore = async (id: string) => {
     await setDoc(doc(db, "authUsers", id), {
       email: props.email,
+      createdAt: new Date(),
     });
   };
 

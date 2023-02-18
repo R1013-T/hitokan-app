@@ -17,20 +17,22 @@ interface Props {
 }
 
 const Top = (props: Props) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const GoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
+    signInWithPopup(auth, provider).catch((err) => {
+      console.log(err);
+    });
   };
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        router.push('/main/View')
+        router.push("/main/View");
       }
-    })
-  },[])
+    });
+  }, []);
 
   return (
     <div className={styles.container}>

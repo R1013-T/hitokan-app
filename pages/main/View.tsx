@@ -28,8 +28,9 @@ const View = () => {
 
   const getUserInfo = () => {
     console.log("user:", user);
+    // ! usersコレクションに存在確認
+    // ! usersコレクションに無かったらセット
     // ! ユーザー情報取得
-    // ! 取得出来なかったらトップに戻す？
     // ! ロード終了
     // ! Stay Signed In 表示
   };

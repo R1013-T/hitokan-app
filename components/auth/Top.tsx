@@ -5,11 +5,13 @@ import { FcGoogle } from "react-icons/fc";
 import Head from "next/head";
 import {
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "lib/firebase";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 interface Props {
   changeAuthState: Function;
 }
@@ -20,8 +22,15 @@ const Top = (props: Props) => {
   const GoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
-    router.push('/main/View')
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push('/main/View')
+      }
+    })
+  },[])
 
   return (
     <div className={styles.container}>

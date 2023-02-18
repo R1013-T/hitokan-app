@@ -21,7 +21,7 @@ const Top = (props: Props) => {
 
   const GoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
+    signInWithPopup(auth, provider);
   };
 
   useEffect(() => {

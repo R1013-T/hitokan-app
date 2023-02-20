@@ -28,10 +28,6 @@
       color: $white_lv2;
       letter-spacing: 3px;
       font-size: 14px;
-
-      &::after {
-        content: '...';
-      }
     }
   }
 }

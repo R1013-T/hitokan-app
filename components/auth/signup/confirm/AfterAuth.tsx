@@ -31,7 +31,7 @@ const AfterAuth = (props: Props) => {
 
     props.changeIsLoading(true, "ユーザー情報を登録中です", false);
     await registerUser();
-    props.changeIsLoading(false, "", false);
+    props.changeIsLoading(true, "", true);
   };
 
   const registerUser = async () => {

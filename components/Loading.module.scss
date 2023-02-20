@@ -16,8 +16,8 @@
     place-items: center;
 
     img {
-      width: min(40%, 200px);
-      margin-bottom: 30px;
+      width: 80px;
+      margin-bottom: 20px;
 
       &.move {
         animation: rotation 1.5s ease-in-out infinite;
@@ -26,7 +26,12 @@
 
     p {
       color: $white_lv2;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      font-size: 14px;
+
+      &::after {
+        content: '...';
+      }
     }
   }
 }

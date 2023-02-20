@@ -19,7 +19,7 @@ const SignUp = (props: Props) => {
   const [isLoading, setIsLoading] = useState({
     state: false,
     text: "",
-    compleat: true,
+    compleat: false,
   });
   const [email, setEmail] = useState(props.email);
   const [password, setPassword] = useState("");

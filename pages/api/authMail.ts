@@ -24,6 +24,6 @@ export default function sendGmail(req: NextApiRequest, res: NextApiResponse) {
 
   transporter.sendMail(authMailData, function (err, info) {
     if (err) console.log(err);
-    // else console.log(info);
+    else console.log(info);
   });
 }

@@ -39,7 +39,7 @@ const EmailAuth = () => {
       router.push("/");
     }
 
-    // await deleteDoc(docRef)
+    await deleteDoc(docRef)
 
     setIsLoading(false);
   };

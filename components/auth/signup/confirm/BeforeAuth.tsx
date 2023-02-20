@@ -31,10 +31,9 @@ const BeforeAuth = (props: Props) => {
     const authUrl = `${location.href}/auth/${id}`;
 
     await setFirestore(id);
+    await handleAuthMailSend(id, authUrl);
 
     props.changeIsLoading(true, "認証メールを送信しました", true);
-
-    handleAuthMailSend(id, authUrl);
   };
 
   const alreadyCheckEmail = async () => {

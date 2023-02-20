@@ -99,11 +99,13 @@
 @media (max-width: 500px) {
   .wrapper {
     height: 95% !important;
+    width: 90%;
+    margin: 0 auto;
   }
 }
 @media (max-width: 350px) {
   .wrapper {
-    height: 95% !important;
+    height: 90% !important;
     form {
       input {
         margin-bottom: 10px !important;

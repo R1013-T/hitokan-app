@@ -18,6 +18,10 @@
   height: 67dvh;
   position: relative;
 
+  &.authEmail {
+    height: 40dvh;
+  }
+
   form {
     label {
       display: block;

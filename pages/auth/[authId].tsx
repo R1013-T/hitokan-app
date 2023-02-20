@@ -2,7 +2,6 @@ import styles from "../../styles/Home.module.scss";
 import Header from "~/Header";
 import SignUp from "~/auth/signup/SignUp";
 import AuthEmail from "~/auth/signup/confirm/AuthEmail";
-import CenterImage from "~/auth/CenterImage";
 import Loading from "~/Loading";
 
 import { useRouter } from "next/router";
@@ -40,7 +39,7 @@ const EmailAuth = () => {
       router.push("/");
     }
 
-    await deleteDoc(docRef)
+    // await deleteDoc(docRef)
 
     setIsLoading(false);
   };

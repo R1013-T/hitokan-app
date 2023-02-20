@@ -14,7 +14,7 @@ const AuthEmail = (props: Props) => {
     <div className={styles.wrapper}>
       <CenterImage dir={2} />
       <main className={styles.main}>
-        <div className={styles.container}>
+        <div className={`${styles.container} ${styles.authEmail}`}>
           <p className={styles.label}>このメールアドレスで間違いないですか？</p>
           <p className={styles.center}>{props.email}</p>
           <div className={styles.buttons}>

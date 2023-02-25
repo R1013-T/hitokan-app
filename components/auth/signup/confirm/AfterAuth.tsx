@@ -63,7 +63,7 @@ const AfterAuth = (props: Props) => {
 
   const addUserFirestore = async (user: User) => {
     await setDoc(doc(db, "users", user.uid), {
-      id: user.uid,
+      email: props.email,
       createdAt: new Date(),
     });
 

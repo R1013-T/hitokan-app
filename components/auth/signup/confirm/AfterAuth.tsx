@@ -49,9 +49,10 @@ const AfterAuth = (props: Props) => {
         let errMsg = "";
         switch (err.code) {
           case "auth/email-already-in-use":
-            errMsg = "このメールアドレスはすでに使用されています。ログインしてください。";
+            errMsg =
+              "このメールアドレスはすでに使用されています。ログインしてください。";
             alert(errMsg);
-            router.push('/')
+            router.push("/");
             break;
           default:
             errMsg = "登録できません。エラーが発生しました。";
@@ -62,11 +63,8 @@ const AfterAuth = (props: Props) => {
 
   const addUserFirestore = async (user: User) => {
     await setDoc(doc(db, "users", user.uid), {
-      email: props.email,
-      password: props.password,
+      id: user.uid,
       createdAt: new Date(),
-      staySignIn: false,
-      showAgain: true,
     });
 
     router.push("/main/View");

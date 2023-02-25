@@ -69,7 +69,15 @@ const BeforeAuth = (props: Props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(mailData),
-    });
+    })
+      .then((res) => {
+        if (res.status !== 200) {
+          console.log(`Error: ${res.status}`);
+        }
+      })
+      .catch((e) => {
+        console.log(`Error: ${e}`);
+      });
   };
 
   return (

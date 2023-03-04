@@ -1,0 +1,14 @@
+@import "./Variable.module.scss";
+
+.wrapper {
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background-color: $white_lv1;
+
+  .viewWrap {
+    height: calc(100dvh - 50px);
+    width: 100vw;
+    display: flex;
+  }
+}

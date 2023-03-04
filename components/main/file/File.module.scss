@@ -1,0 +1,20 @@
+@import "../../../styles/Variable.module.scss";
+
+.wrapper {
+  height: calc(100dvh - 50px);
+  width: 25vw;
+  background: $white_lv2;
+
+  p {
+    &.title {
+      width: 90%;
+      margin: 5px auto 0;
+      text-align: center;
+      color: $black_lv1;
+      font-size: 17px;
+      padding: 5px 0;
+      border-radius: 10px;
+      background: rgba($color: $white_lv1, $alpha: 0.5);
+    }
+  }
+}

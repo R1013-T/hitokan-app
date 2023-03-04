@@ -1,0 +1,25 @@
+@import "../../styles/Variable.module.scss";
+
+.container {
+  width: 100vw;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $white_lv2;
+
+  .menuWrap,
+  .spaceWrap {
+    .icon {
+      font-size: 20px;
+      height: 50px;
+      width: 50px;
+      padding: 10px;
+      color: $black_lv2;
+    }
+  }
+
+  img {
+    height: 23px;
+  }
+}

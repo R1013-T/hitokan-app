@@ -1,32 +1,54 @@
-import { onAuthStateChanged, signOut, User } from "firebase/auth";
+import styles from "../../styles/View.module.scss";
+import Loading from "~/Loading";
+import Header from "~/main/Header";
+import Option from "~/main/option/Option";
+import FileView from "~/main/file/View";
+import PeopleView from "~/main/people/View";
+
+import { useRouter } from "next/router";
+import { createContext, useEffect, useState } from "react";
+
+import { auth, db } from "lib/firebase";
+import { onAuthStateChanged, User } from "firebase/auth";
 import {
   addDoc,
   collection,
   doc,
   DocumentData,
   getDoc,
-  getDocs,
   onSnapshot,
   setDoc,
 } from "firebase/firestore";
-import { auth, db } from "lib/firebase";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Loading from "~/Loading";
 
-interface UserData {
+interface UserDataType {
   setting: DocumentData | undefined;
   info: DocumentData | undefined;
 }
+
+interface DataType {
+  user: User | undefined;
+  userData: UserDataType | undefined;
+  peopleData: DocumentData | undefined;
+}
+
+const dataContext: DataType = {
+  user: undefined,
+  userData: undefined,
+  peopleData: undefined,
+};
+
+export const UserContext = createContext<DataType>(dataContext);
 
 const View = () => {
   const router = useRouter();
 
   const [user, setUser] = useState<User | undefined>();
-  let userData: UserData;
-  let peopleData: DocumentData;
+  // let userData: UserData;
+  // let peopleData: DocumentData;
 
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [showOption, setShowOption] = useState(false);
 
   useEffect(() => {
     // ログイン状態確認
@@ -34,6 +56,7 @@ const View = () => {
       if (user) {
         // ユーザー情報をセット
         setUser(user);
+        dataContext.user = user;
       } else {
         // ログインしていない場合はトップページヘ
         router.push("/");
@@ -48,7 +71,7 @@ const View = () => {
     // peopleコレクション常にチェック
     const peopleCollection = collection(db, "usersData", user.uid, "people");
     const unsub = onSnapshot(peopleCollection, (people) => {
-      peopleData = people;
+      dataContext.peopleData = people;
     });
   }, [user]);
 
@@ -61,11 +84,13 @@ const View = () => {
     // usersDataコレクションに存在確認
     if (docSnap.exists()) {
       //  ユーザー情報取得
-      getUserInfo();
+      await getUserInfo();
     } else {
       // usersDataコレクションに無かったらセット
-      setUserInfo();
+      await setUserInfo();
     }
+
+    setIsLoading(false);
   };
 
   const getUserInfo = async () => {
@@ -75,7 +100,7 @@ const View = () => {
     const settingDoc = await getDoc(doc(docRef, "data", "setting"));
     const infoDoc = await getDoc(doc(docRef, "data", "info"));
 
-    userData = { setting: settingDoc.data(), info: infoDoc.data() };
+    dataContext.userData = { setting: settingDoc.data(), info: infoDoc.data() };
   };
 
   const setUserInfo = async () => {
@@ -100,43 +125,57 @@ const View = () => {
     });
   };
 
-  const handleSet = () => {
-    if (!user) return;
+  // const handleSet = () => {
+  //   if (!user) return;
 
-    const labels = ["name", "age"];
-    const data = ["太郎", 10];
+  //   const labels = ["name", "age"];
+  //   const data = ["太郎", 10];
 
-    addDoc(collection(db, "usersData", user.uid, "people"), {
-      file: "fileName",
-      createdAt: new Date(),
-      labels: labels,
-      data: data,
-    });
-  };
+  //   addDoc(collection(db, "usersData", user.uid, "people"), {
+  //     file: "fileName",
+  //     createdAt: new Date(),
+  //     labels: labels,
+  //     data: data,
+  //   });
+  // };
 
-  const handleConsole = () => {
-    console.log("setting: ", userData?.setting);
-    console.log("info   : ", userData?.info);
-    if (peopleData.size != 0) {
-      console.log("people");
-      peopleData.forEach((doc: DocumentData) => {
-        console.log(doc.data());
-      });
-    } else {
-      console.log("noting people");
-    }
+  // const handleConsole = () => {
+  //   console.log("setting: ", userData?.setting);
+  //   console.log("info   : ", userData?.info);
+  //   if (peopleData.size != 0) {
+  //     console.log("people");
+  //     peopleData.forEach((doc: DocumentData) => {
+  //       console.log(doc.data());
+  //     });
+  //   } else {
+  //     console.log("noting people");
+  //   }
+  // };
+
+  const changeShowOption = (state: boolean) => {
+    setShowOption(state);
   };
 
   return (
-    <div>
-      {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""}
-      <p>{user?.email}</p>
+    <div className={styles.wrapper}>
+      <UserContext.Provider value={dataContext}>
+        <Header changeShowOption={changeShowOption} />
+        {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""}
+        {showOption ? <Option changeShowOption={changeShowOption} /> : ""}
+
+        <div className={styles.viewWrap}>
+          <FileView />
+          <PeopleView />
+        </div>
+      </UserContext.Provider>
+
+      {/* <p>{user?.email}</p>
       <p>{user?.displayName}</p>
       <button onClick={() => signOut(auth)}>Sign Out</button>
       <br />
       <button onClick={handleSet}>set</button>
       <br />
-      <button onClick={handleConsole}>console</button>
+      <button onClick={handleConsole}>console</button> */}
     </div>
   );
 };

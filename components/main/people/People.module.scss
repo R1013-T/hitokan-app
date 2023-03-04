@@ -1,0 +1,7 @@
+@import "../../../styles/Variable.module.scss";
+
+.wrapper {
+  height: calc(100dvh - 50px);
+  width: 75vw;
+  background: $white_lv2;
+}

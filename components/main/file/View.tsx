@@ -13,25 +13,27 @@ import {
 
 interface Props {
   files: string[];
+  changeActiveFile: Function;
+  activeFile?: { name?: string; number?: number };
 }
 
 const View = (props: Props) => {
   const [user, setUser] = useState<User>();
   const [files, setFiles] = useState<string[]>(props.files);
-
-  const [activeFile, setActiveFile] = useState<number>(0);
+  const [activeFileNumber, setActiveFileNumber] = useState<number>(0);
+  const [activeFileName, setActiveFileName] = useState("");
 
   useEffect(() => {
+    // fileを表示
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // peopleコレクション常にチェック
         const peopleCollection = collection(
           db,
           "usersData",
           user.uid,
           "people"
         );
-        const q = query(peopleCollection, orderBy("createdAt", "desc"));
+        const q = query(peopleCollection, orderBy("updatedAt", "desc"));
         const unsub = onSnapshot(q, (people) => {
           let fileArray: string[] = [];
           console.log("filesF", fileArray);
@@ -58,17 +60,16 @@ const View = (props: Props) => {
     console.log("files:", files);
   }, [files]);
 
+  // active file
   const handleFileClick = (
     e: React.MouseEvent<HTMLParagraphElement, MouseEvent>
   ) => {
-    console.log(e.currentTarget.id);
-    setActiveFile(Number(e.currentTarget.id));
+    setActiveFileName(String(e.currentTarget.textContent));
+    setActiveFileNumber(Number(e.currentTarget.id));
   };
-
-  const handleConsole = () => {
-    console.log(files);
-    console.log(props.files);
-  };
+  useEffect(() => {
+    props.changeActiveFile(activeFileName, activeFileNumber);
+  }, [activeFileName, activeFileNumber]);
 
   return (
     <div className={styles.wrapper}>
@@ -80,14 +81,13 @@ const View = (props: Props) => {
           <p
             key={i}
             id={String(i)}
-            className={activeFile === i ? styles.active : ""}
+            className={activeFileNumber === i ? styles.active : ""}
             onClick={(e) => handleFileClick(e)}
           >
             {file}
           </p>
         ))}
       </div>
-      <button onClick={handleConsole}>console</button>
     </div>
   );
 };

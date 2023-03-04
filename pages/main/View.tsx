@@ -37,6 +37,10 @@ const View = () => {
 
   const [user, setUser] = useState<User | undefined>();
   const [filesState, setFilesState] = useState<string[]>([]);
+  const [activeFile, setActiveFile] = useState<{
+    name?: string;
+    number?: number;
+  }>();
 
   const [isLoading, setIsLoading] = useState(true);
   const [showOption, setShowOption] = useState(false);
@@ -48,7 +52,6 @@ const View = () => {
         // ユーザー情報をセット
         setUser(user);
 
-        // !
         setUserData((prevState) => ({ ...prevState, user: user }));
       } else {
         // ログインしていない場合はトップページヘ
@@ -128,10 +131,11 @@ const View = () => {
     const data = ["太郎", 10];
 
     addDoc(collection(db, "usersData", user.uid, "people"), {
-      file: "fileName08",
+      file: "fileName03",
       createdAt: new Date(),
+      updatedAt: new Date(),
       labels: labels,
-      data: data,
+      values: data,
     });
   };
 
@@ -161,12 +165,16 @@ const View = () => {
       }
     });
 
-    setFilesState(files)
+    setFilesState(files);
   };
 
   useEffect(() => {
-    console.log(filesState)
-  },[filesState])
+    console.log(filesState);
+  }, [filesState]);
+
+  const changeActiveFile = (fileName: string, fileNumber: number) => {
+    setActiveFile({ name: fileName, number: fileNumber });
+  };
 
   const changeShowOption = (state: boolean) => {
     setShowOption(state);
@@ -175,13 +183,18 @@ const View = () => {
   return (
     <div className={styles.wrapper}>
       <Header changeShowOption={changeShowOption} />
-      {/* <button onClick={handleSet}>set</button> */}
       {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""}
       {showOption ? <Option changeShowOption={changeShowOption} /> : ""}
 
+      {/* <button onClick={handleSet}>set</button> */}
+
       <div className={styles.viewWrap}>
-        <FileView files={filesState} />
-        <PeopleView />
+        <FileView
+          files={filesState}
+          changeActiveFile={changeActiveFile}
+          activeFile={activeFile}
+        />
+        <PeopleView activeFile={activeFile?.name} />
       </div>
 
       {/* <p>{user?.email}</p>

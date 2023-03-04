@@ -1,11 +1,15 @@
-import styles from "./People.module.scss"
+import styles from "./People.module.scss";
 
-const FileName = () => {
+interface Props {
+  activeFile?: string;
+}
+
+const FileName = (props: Props) => {
   return (
     <div className={styles.fileNameWrap}>
-      fileName
+      <p>{props.activeFile}</p>
     </div>
   );
-}
+};
 
 export default FileName;

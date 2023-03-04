@@ -40,8 +40,8 @@ const View = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log("p", peopleData);
-  }, [peopleData]);
+    console.log(props.activeFile)
+  },[props.activeFile])
 
   return (
     <div className={styles.wrapper}>

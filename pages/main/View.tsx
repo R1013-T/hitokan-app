@@ -141,7 +141,6 @@ const View = () => {
 
   useEffect(() => {
     if (!userData) return;
-    console.log("userData", userData);
 
     checkFiles();
   }, [userData]);
@@ -168,10 +167,6 @@ const View = () => {
     setFilesState(files);
   };
 
-  useEffect(() => {
-    console.log(filesState);
-  }, [filesState]);
-
   const changeActiveFile = (fileName: string, fileNumber: number) => {
     setActiveFile({ name: fileName, number: fileNumber });
   };
@@ -196,13 +191,6 @@ const View = () => {
         />
         <PeopleView activeFile={activeFile?.name} />
       </div>
-
-      {/* <p>{user?.email}</p>
-      <p>{user?.displayName}</p>
-      <button onClick={() => signOut(auth)}>Sign Out</button>
-      <br />
-      <br />
-      <button onClick={handleConsole}>console</button> */}
     </div>
   );
 };

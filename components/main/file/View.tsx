@@ -36,7 +36,6 @@ const View = (props: Props) => {
         const q = query(peopleCollection, orderBy("updatedAt", "desc"));
         const unsub = onSnapshot(q, (people) => {
           let fileArray: string[] = [];
-          console.log("filesF", fileArray);
           people.forEach((doc: DocumentData) => {
             let currentFile = doc.data().file;
             if (fileArray.length != 0) {
@@ -46,7 +45,6 @@ const View = (props: Props) => {
               });
               if (!alreadyFileFlag) fileArray.push(currentFile);
             } else {
-              console.log("a");
               fileArray.push(currentFile);
             }
           });
@@ -55,10 +53,6 @@ const View = (props: Props) => {
       }
     });
   }, []);
-
-  useEffect(() => {
-    console.log("files:", files);
-  }, [files]);
 
   // active file
   const handleFileClick = (

@@ -1,7 +1,9 @@
+import styles from "./People.module.scss"
+
 const FileName = () => {
   return (
-    <div>
-      Enter
+    <div className={styles.fileNameWrap}>
+      fileName
     </div>
   );
 }

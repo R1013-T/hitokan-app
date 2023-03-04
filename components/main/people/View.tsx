@@ -1,9 +1,11 @@
 import styles from "./People.module.scss"
+import FileName from "./FileName";
 
 const View = () => {
   return (
     <div className={styles.wrapper}>
-      Enter
+      <FileName />
+      <p>　people</p>
     </div>
   );
 }

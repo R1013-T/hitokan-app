@@ -26,26 +26,17 @@ interface UserDataType {
 }
 
 interface DataType {
-  user: User | undefined;
-  userData: UserDataType | undefined;
-  peopleData: DocumentData | undefined;
+  user?: User;
+  userData?: UserDataType;
+  peopleData?: DocumentData;
 }
-
-const dataContext: DataType = {
-  user: undefined,
-  userData: undefined,
-  peopleData: undefined,
-};
-
-export const UserContext = createContext<DataType>(dataContext);
-
 const View = () => {
   const router = useRouter();
 
-  const [user, setUser] = useState<User | undefined>();
-  // let userData: UserData;
-  // let peopleData: DocumentData;
+  const [userData, setUserData] = useState<DataType>();
 
+  const [user, setUser] = useState<User | undefined>();
+  const [filesState, setFilesState] = useState<string[]>([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [showOption, setShowOption] = useState(false);
@@ -56,7 +47,9 @@ const View = () => {
       if (user) {
         // ユーザー情報をセット
         setUser(user);
-        dataContext.user = user;
+
+        // !
+        setUserData((prevState) => ({ ...prevState, user: user }));
       } else {
         // ログインしていない場合はトップページヘ
         router.push("/");
@@ -71,7 +64,7 @@ const View = () => {
     // peopleコレクション常にチェック
     const peopleCollection = collection(db, "usersData", user.uid, "people");
     const unsub = onSnapshot(peopleCollection, (people) => {
-      dataContext.peopleData = people;
+      setUserData((prevState) => ({ ...prevState, peopleData: people }));
     });
   }, [user]);
 
@@ -100,7 +93,10 @@ const View = () => {
     const settingDoc = await getDoc(doc(docRef, "data", "setting"));
     const infoDoc = await getDoc(doc(docRef, "data", "info"));
 
-    dataContext.userData = { setting: settingDoc.data(), info: infoDoc.data() };
+    setUserData((prevState) => ({
+      ...prevState,
+      userData: { setting: settingDoc.data(), info: infoDoc.data() },
+    }));
   };
 
   const setUserInfo = async () => {
@@ -125,32 +121,52 @@ const View = () => {
     });
   };
 
-  // const handleSet = () => {
-  //   if (!user) return;
+  const handleSet = () => {
+    if (!user) return;
 
-  //   const labels = ["name", "age"];
-  //   const data = ["太郎", 10];
+    const labels = ["name", "age"];
+    const data = ["太郎", 10];
 
-  //   addDoc(collection(db, "usersData", user.uid, "people"), {
-  //     file: "fileName",
-  //     createdAt: new Date(),
-  //     labels: labels,
-  //     data: data,
-  //   });
-  // };
+    addDoc(collection(db, "usersData", user.uid, "people"), {
+      file: "fileName08",
+      createdAt: new Date(),
+      labels: labels,
+      data: data,
+    });
+  };
 
-  // const handleConsole = () => {
-  //   console.log("setting: ", userData?.setting);
-  //   console.log("info   : ", userData?.info);
-  //   if (peopleData.size != 0) {
-  //     console.log("people");
-  //     peopleData.forEach((doc: DocumentData) => {
-  //       console.log(doc.data());
-  //     });
-  //   } else {
-  //     console.log("noting people");
-  //   }
-  // };
+  useEffect(() => {
+    if (!userData) return;
+    console.log("userData", userData);
+
+    checkFiles();
+  }, [userData]);
+
+  const checkFiles = () => {
+    if (!userData) return;
+    if (!userData.peopleData) return;
+    let files: string[] = [];
+
+    userData.peopleData.forEach((people: DocumentData) => {
+      const currentFile = people.data().file;
+
+      if (files.length > 0) {
+        let alreadyFileData = false;
+        files.forEach((file) => {
+          if (currentFile === file) alreadyFileData = true;
+        });
+        if (!alreadyFileData) files.push(currentFile);
+      } else {
+        files.push(currentFile);
+      }
+    });
+
+    setFilesState(files)
+  };
+
+  useEffect(() => {
+    console.log(filesState)
+  },[filesState])
 
   const changeShowOption = (state: boolean) => {
     setShowOption(state);
@@ -158,22 +174,20 @@ const View = () => {
 
   return (
     <div className={styles.wrapper}>
-      <UserContext.Provider value={dataContext}>
-        <Header changeShowOption={changeShowOption} />
-        {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""}
-        {showOption ? <Option changeShowOption={changeShowOption} /> : ""}
+      <Header changeShowOption={changeShowOption} />
+      {/* <button onClick={handleSet}>set</button> */}
+      {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""}
+      {showOption ? <Option changeShowOption={changeShowOption} /> : ""}
 
-        <div className={styles.viewWrap}>
-          <FileView />
-          <PeopleView />
-        </div>
-      </UserContext.Provider>
+      <div className={styles.viewWrap}>
+        <FileView files={filesState} />
+        <PeopleView />
+      </div>
 
       {/* <p>{user?.email}</p>
       <p>{user?.displayName}</p>
       <button onClick={() => signOut(auth)}>Sign Out</button>
       <br />
-      <button onClick={handleSet}>set</button>
       <br />
       <button onClick={handleConsole}>console</button> */}
     </div>

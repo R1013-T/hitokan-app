@@ -1,7 +1,9 @@
+import styles from "./People.module.scss"
+
 const Panel = () => {
   return (
-    <div>
-      Enter
+    <div className={styles.panelContainer}>
+      <p>panel</p>
     </div>
   );
 }

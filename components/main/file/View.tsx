@@ -10,6 +10,8 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
+import Head from "next/head";
+import Panel from "./Panel";
 
 interface Props {
   files: string[];
@@ -67,19 +69,22 @@ const View = (props: Props) => {
 
   return (
     <div className={styles.wrapper}>
+      <Head>
+        <title>HITOKAN</title>
+      </Head>
       <div className={styles.title}>
-        <p>files</p>
+        <p>file</p>
       </div>
       <div className={styles.fileWrap}>
         {files.map((file, i) => (
-          <p
+          <div
             key={i}
             id={String(i)}
-            className={activeFileNumber === i ? styles.active : ""}
+            className={`${styles.file} ${activeFileNumber === i ? styles.active : ""}`}
             onClick={(e) => handleFileClick(e)}
           >
-            {file}
-          </p>
+            <Panel fileName={file} isActive={activeFileNumber === i} />
+          </div>
         ))}
       </div>
     </div>

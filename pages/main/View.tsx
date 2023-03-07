@@ -1,7 +1,6 @@
 import styles from "../../styles/View.module.scss";
 import Loading from "~/Loading";
 import Header from "~/main/Header";
-import Option from "~/main/option/Option";
 import FileView from "~/main/file/View";
 import PeopleView from "~/main/people/View";
 
@@ -19,6 +18,7 @@ import {
   onSnapshot,
   setDoc,
 } from "firebase/firestore";
+import Cover from "~/main/cover/Cover";
 
 interface UserDataType {
   setting: DocumentData | undefined;
@@ -124,19 +124,24 @@ const View = () => {
     });
   };
 
-  const handleSet = () => {
+  const handleSet = async () => {
     if (!user) return;
 
     const labels = ["name", "age"];
     const data = ["太郎", 10];
 
-    addDoc(collection(db, "usersData", user.uid, "people"), {
-      file: "fileName03",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      labels: labels,
-      values: data,
-    });
+    for (let i = 1; i <= 10; i++) {
+      const zeroPadding = (val: number, length: number) =>
+        ("0000000" + val).slice(-length);
+
+      await addDoc(collection(db, "usersData", user.uid, "people"), {
+        file: `fileName ${zeroPadding(i, 2)}`,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        labels: labels,
+        values: data,
+      });
+    }
   };
 
   useEffect(() => {
@@ -179,7 +184,7 @@ const View = () => {
     <div className={styles.wrapper}>
       <Header changeShowOption={changeShowOption} />
       {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""}
-      {showOption ? <Option changeShowOption={changeShowOption} /> : ""}
+      {showOption ? <Cover changeShowOption={changeShowOption} /> : ""}
 
       {/* <button onClick={handleSet}>set</button> */}
 

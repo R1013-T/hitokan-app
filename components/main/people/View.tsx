@@ -10,6 +10,7 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
+import ActivePeople from "./ActivePeople";
 
 interface Props {
   activeFile?: string;
@@ -39,10 +40,6 @@ const View = (props: Props) => {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(props.activeFile)
-  },[props.activeFile])
-
   return (
     <div className={styles.wrapper}>
       <FileName
@@ -52,7 +49,14 @@ const View = (props: Props) => {
             : props.activeFile
         }
       />
-      <p>people</p>
+      <ActivePeople
+        activeFile={
+          !props.activeFile && peopleData && peopleData[0]
+            ? peopleData[0].file
+            : props.activeFile
+        }
+        peopleData={peopleData}
+      />
     </div>
   );
 };

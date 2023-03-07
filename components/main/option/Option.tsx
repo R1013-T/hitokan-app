@@ -1,36 +1,14 @@
-import styles from "./Option.module.scss";
-import Inner from "./Inner";
+import styles from "./Option.module.scss"
 
-interface Props {
-  changeShowOption: Function;
-}
+import { signOut } from "firebase/auth";
+import { auth } from "lib/firebase";
 
-const Option = (props: Props) => {
+const Option = () => {
   return (
-    <div className={styles.container}>
-      <div
-        className={styles.top}
-        onClick={() => props.changeShowOption(false)}
-      ></div>
-      <div
-        className={styles.left}
-        onClick={() => props.changeShowOption(false)}
-      ></div>
-      <div className={styles.center}>
-        <div className={styles.inner}>
-          <Inner />
-        </div>
-      </div>
-      <div
-        className={styles.right}
-        onClick={() => props.changeShowOption(false)}
-      ></div>
-      <div
-        className={styles.bottom}
-        onClick={() => props.changeShowOption(false)}
-      ></div>
+    <div className={styles.inner}>
+      <button onClick={() => signOut(auth)} >signOut</button>
     </div>
   );
-};
+}
 
 export default Option;

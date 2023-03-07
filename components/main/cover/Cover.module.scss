@@ -1,0 +1,97 @@
+@import "../../../styles/View.module.scss";
+
+.container {
+  width: 100vw;
+  height: 100dvh;
+  background: rgba($color: #000000, $alpha: 0.5);
+  position: fixed;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+
+  animation: show 0.3s ease-out forwards;
+
+  &.close {
+    animation: close 0.3s ease-out forwards;
+  }
+
+  .top,
+  .bottom {
+    width: 100%;
+    height: 10%;
+  }
+
+  .left,
+  .right {
+    width: 20%;
+    height: 80%;
+  }
+
+  .center {
+    width: 60%;
+    height: 80%;
+
+    animation: show 0.3s ease-out forwards;
+    animation: up 0.3s ease-out forwards;
+
+    &.close {
+      animation: close 0.3s ease-out forwards;
+      animation: down 0.3s ease-out forwards;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .top,
+  .bottom {
+    height: 15% !important;
+  }
+
+  .left,
+  .right {
+    width: 10% !important;
+    height: 70% !important;
+  }
+
+  .center {
+    width: 80% !important;
+    height: 70% !important;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes close {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes up {
+  0% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}

@@ -1,53 +1,15 @@
 @import "../../../styles/View.module.scss";
 
-.container {
-  width: 100vw;
-  height: 100dvh;
-  background: rgba($color: #000000, $alpha: 0.5);
-  position: fixed;
-  top: 0;
-  z-index: 30;
-  display: flex;
-  flex-wrap: wrap;
-
-  .top,
-  .bottom {
-    width: 100%;
-    height: 10%;
-  }
-
-  .left,
-  .right {
-    width: 20%;
-    height: 80%;
-  }
-
-  .center {
-    width: 60%;
-    height: 80%;
-  }
+.inner {
+  width: 60vw;
+  height: 80dvh;
+  background: $white_lv3;
+  border-radius: 5px;
 }
 
 @media (max-width: 900px) {
-  .top,
-  .bottom {
-    height: 15% !important;
+  .inner {
+    width: 80vw !important;
+    height: 70dvh !important;
   }
-
-  .left,
-  .right {
-    width: 10% !important;
-    height: 70% !important;
-  }
-
-  .center {
-    width: 80% !important;
-    height: 70% !important;
-  }
-}
-
-.inner {
-  width: 100%;
-  height: 100%;
-  background: $white_lv1;
 }

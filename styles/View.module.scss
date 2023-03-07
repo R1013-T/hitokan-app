@@ -4,10 +4,11 @@
   width: 100vw;
   height: 100dvh;
   overflow: hidden;
-  background-color: $white_lv2;
+  background-color: $white_lv3;
 
   .viewWrap {
-    height: calc(100dvh - 50px);
+    margin-top: 5px;
+    height: calc(100dvh - 55px);
     width: 100vw;
     display: flex;
   }

@@ -37,9 +37,11 @@
       transition: all 0.5s;
       letter-spacing: 1px;
       padding: 7px 10px;
+      border: 1px solid $white_lv3;
 
       &.active {
-        background: rgba($color: $white_lv1, $alpha: 0.5);
+        background: $white_lv2;
+        border: 1px solid $white_lv1;
         color: $black_lv3;
         padding: 7px 10px;
       }
@@ -56,14 +58,14 @@
     width: 4px;
     background: $white_lv3;
     margin-right: 9px;
-    transition: all 0.5s;
+    transition: all 0.4s;
     border-radius: 2px;
     transform: translateX(-3px);
   }
 
   .fileName {
     overflow-x: scroll;
-    transition: all 0.5s;
+    transition: all 0.4s;
     padding: 6px 0;
     transform: translateX(0px);
   }

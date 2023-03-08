@@ -23,19 +23,21 @@ const ActivePeople = (props: Props) => {
   }, [props.activeFile, props.peopleData]);
 
   useEffect(() => {
-    console.log(activePeople);
+    console.log("▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽")
+    activePeople?.forEach((parson) => {
+      console.log(parson)
+    });
+    console.log("△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△")
   }, [activePeople]);
 
   return (
     <div className={styles.activeWrap}>
       <div className={styles.panelWrap}>
-        <Panel />
-        <Panel />
-        <Panel />
-        <Panel />
-        <Panel />
-        <Panel />
-        <Panel />
+        {activePeople?.map((parson, i) => (
+          <div key={i} id={String(i)}>
+            <Panel parson={parson} />
+          </div>
+        ))}
       </div>
     </div>
   );

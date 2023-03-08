@@ -127,21 +127,20 @@ const View = () => {
   const handleSet = async () => {
     if (!user) return;
 
-    const labels = ["name", "age"];
-    const data = ["太郎", 10];
+    const labels = ["name", "email", "phone", "age", "address"];
+    const data = ["name22", "name22@test.com", "000-0000-0000", 10, "Tokyo"];
+    const file = 10;
 
-    for (let i = 1; i <= 10; i++) {
-      const zeroPadding = (val: number, length: number) =>
-        ("0000000" + val).slice(-length);
+    const zeroPadding = (val: number, length: number) =>
+      ("0000000" + val).slice(-length);
 
-      await addDoc(collection(db, "usersData", user.uid, "people"), {
-        file: `fileName ${zeroPadding(i, 2)}`,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        labels: labels,
-        values: data,
-      });
-    }
+    await addDoc(collection(db, "usersData", user.uid, "people"), {
+      file: `fileName ${zeroPadding(file, 2)}`,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      labels: labels,
+      values: data,
+    });
   };
 
   useEffect(() => {

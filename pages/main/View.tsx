@@ -7,6 +7,7 @@ import PeopleView from "~/main/people/View";
 import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
 
+import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import {
@@ -185,7 +186,7 @@ const View = () => {
       {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""}
       {showOption ? <Cover changeShowOption={changeShowOption} /> : ""}
 
-      {/* <button onClick={handleSet}>set</button> */}
+      <button onClick={handleSet}>set</button>
 
       <div className={styles.viewWrap}>
         <FileView

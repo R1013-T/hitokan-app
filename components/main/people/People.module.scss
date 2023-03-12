@@ -41,13 +41,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
-    padding: 25px 15px;
+    padding: 25px 20px 50px;
   }
 }
 
 .panelContainer {
   height: 200px;
-  width: 270px;
+  width: 275px;
   margin: 20px 15px;
   border: 1px solid $white_lv1;
   background: $white_lv3;
@@ -59,6 +59,16 @@
   &:hover {
     background-color: $white_lv2;
   }
+
+  label {
+    display: block;
+    color: $black_lv1;
+  }
+  input {
+    outline: none;
+    color: $black_lv3;
+  }
+
 
   .imageWrap {
     width: 50px;
@@ -75,13 +85,10 @@
     // border: 1px solid green;
 
     label {
-      display: block;
-      color: $black_lv1;
       font-size: 14px;
     }
 
     input {
-      color: $black_lv3;
       font-size: 20px;
     }
   }
@@ -99,17 +106,11 @@
       margin: 5px 8px;
       padding: 3px 3px 7px;
 
-      &:last-of-type{
-        // border: none;
-      }
-
       label {
-        color: $black_lv1;
         font-size: 11px;
       }
 
       input {
-        color: $black_lv3;
         font-size: 15px;
       }
 

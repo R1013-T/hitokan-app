@@ -1,7 +1,8 @@
+import { DocumentData } from "firebase/firestore";
 import styles from "./People.module.scss";
 
 interface Props {
-  parson: any;
+  parson: DocumentData;
 }
 
 const Panel = (props: Props) => {
@@ -24,7 +25,6 @@ const Panel = (props: Props) => {
             className={`${styles.item} ${i === 0 ? styles.hidden : ""}`}
           >
             <label>{props.parson.labels[i]}</label>
-            <br />
             <input type="text" value={item} readOnly />
           </div>
         ))}

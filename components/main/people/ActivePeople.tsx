@@ -6,6 +6,7 @@ import styles from "./People.module.scss";
 interface Props {
   peopleData?: DocumentData[];
   activeFile?: string;
+  changeActiveParson: Function;
 }
 
 const ActivePeople = (props: Props) => {
@@ -22,19 +23,23 @@ const ActivePeople = (props: Props) => {
     setActivePeople(activePeopleArray);
   }, [props.activeFile, props.peopleData]);
 
-  useEffect(() => {
-    console.log("▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽")
-    activePeople?.forEach((parson) => {
-      console.log(parson)
-    });
-    console.log("△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△")
-  }, [activePeople]);
+  // useEffect(() => {
+  //   console.log("▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽");
+  //   activePeople?.forEach((parson) => {
+  //     console.log(parson);
+  //   });
+  //   console.log("△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△");
+  // }, [activePeople]);
+
+  const handleParsonClick = (parson: DocumentData) => {
+    props.changeActiveParson(parson)
+  };
 
   return (
     <div className={styles.activeWrap}>
       <div className={styles.panelWrap}>
         {activePeople?.map((parson, i) => (
-          <div key={i} id={String(i)}>
+          <div key={i} id={String(i)} onClick={() => handleParsonClick(parson)}>
             <Panel parson={parson} />
           </div>
         ))}

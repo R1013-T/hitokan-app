@@ -81,7 +81,6 @@ const Input = (props: Props) => {
         props.changeIsLoading(false);
       });
 
-    console.log(email, password);
   };
 
   return (

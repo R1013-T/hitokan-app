@@ -3,6 +3,26 @@
 .container {
   width: 100%;
   height: 100%;
+
+  form {
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+
+    button {
+      display: block;
+      width: 95%;
+      margin: 0 auto;
+      transform: translateY(-140px);
+      background-color: $theme;
+      color: $white_lv3;
+      border-radius: 4px;
+      text-align: center;
+      padding: 12px 0;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+  }
 }
 
 .headWrap {
@@ -46,6 +66,9 @@
         &.close {
           color: #000;
         }
+        &.trash {
+          color: $red;
+        }
         color: $theme;
       }
     }
@@ -53,22 +76,100 @@
     .item {
       transition: all 0.3s;
       opacity: 1;
+      font-size: 22px;
 
       &.close {
-        font-size: 24px;
+        font-size: 27px;
       }
 
-      &.folder {
-        font-size: 20px;
+      &.add {
+        font-size: 23px;
+        transform: translate(1px, 1px);
+      }
+    }
+  }
+}
+
+.dataWrap {
+  width: 100%;
+  height: calc(100% + 80px);
+
+  .itemWrap {
+    width: 100%;
+    height: 80px;
+  }
+}
+
+.data {
+  height: 70px;
+  width: 100%;
+
+  .imageWrap {
+    display: grid;
+    place-items: center;
+    height: 150%;
+
+    .img {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: $white_lv3;
+      overflow: hidden;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
-      &.copy {
-        font-size: 20px;
-      }
+      label {
+        position: absolute;
+        bottom: 0;
+        height: 20px;
+        width: 100%;
+        text-align: center;
+        color: $white_lv3;
+        font-size: 13px;
+        background: rgba($color: #000000, $alpha: 0.7);
+        display: grid;
+        place-items: center;
 
-      &.trash {
-        font-size: 22px;
+        .imageSelectIcon {
+          font-size: 16px;
+          color: $white_lv3;
+        }
+
+        input {
+          display: none;
+        }
       }
+    }
+  }
+
+  .valueWrap {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+
+    label {
+      display: block;
+      color: $black_lv1;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      color: $black_lv3;
+      border: 1px solid $white_lv1;
+      border-radius: 3px;
+      background: $white_lv2;
+      font-size: 16px;
+      padding: 8px 7px;
     }
   }
 }

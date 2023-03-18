@@ -14,47 +14,15 @@ import Head from "next/head";
 import Panel from "./Panel";
 
 interface Props {
-  files: string[];
+  files?: string[];
   changeActiveFile: Function;
   activeFile?: { name?: string; number?: number };
 }
 
 const View = (props: Props) => {
-  const [user, setUser] = useState<User>();
-  const [files, setFiles] = useState<string[]>(props.files);
+  const [files, setFiles] = useState<string[] | undefined>([]);
   const [activeFileNumber, setActiveFileNumber] = useState<number>(0);
   const [activeFileName, setActiveFileName] = useState("");
-
-  useEffect(() => {
-    // fileを表示
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const peopleCollection = collection(
-          db,
-          "usersData",
-          user.uid,
-          "people"
-        );
-        const q = query(peopleCollection, orderBy("updatedAt", "desc"));
-        const unsub = onSnapshot(q, (people) => {
-          let fileArray: string[] = [];
-          people.forEach((doc: DocumentData) => {
-            let currentFile = doc.data().file;
-            if (fileArray.length != 0) {
-              let alreadyFileFlag = false;
-              fileArray.forEach((file) => {
-                if (file === currentFile) alreadyFileFlag = true;
-              });
-              if (!alreadyFileFlag) fileArray.push(currentFile);
-            } else {
-              fileArray.push(currentFile);
-            }
-          });
-          setFiles(fileArray);
-        });
-      }
-    });
-  }, []);
 
   // active file
   const handleFileClick = (
@@ -67,20 +35,24 @@ const View = (props: Props) => {
     props.changeActiveFile(activeFileName, activeFileNumber);
   }, [activeFileName, activeFileNumber]);
 
+  useEffect(() => {
+    console.log("files:", props.files);
+    setFiles(props.files)
+  }, [props.files]);
+
   return (
     <div className={styles.wrapper}>
-      <Head>
-        <title>HITOKAN</title>
-      </Head>
       <div className={styles.title}>
         <p>file</p>
       </div>
       <div className={styles.fileWrap}>
-        {files.map((file, i) => (
+        {files?.map((file, i) => (
           <div
             key={i}
             id={String(i)}
-            className={`${styles.file} ${activeFileNumber === i ? styles.active : ""}`}
+            className={`${styles.file} ${
+              activeFileNumber === i ? styles.active : ""
+            }`}
             onClick={(e) => handleFileClick(e)}
           >
             <Panel fileName={file} isActive={activeFileNumber === i} />

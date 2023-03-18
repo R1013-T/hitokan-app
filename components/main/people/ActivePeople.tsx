@@ -4,7 +4,7 @@ import Panel from "./Panel";
 import styles from "./People.module.scss";
 
 interface Props {
-  peopleData?: DocumentData[];
+  people?: DocumentData[];
   activeFile?: string;
   changeActiveParson: Function;
 }
@@ -13,15 +13,15 @@ const ActivePeople = (props: Props) => {
   const [activePeople, setActivePeople] = useState<DocumentData[]>();
 
   useEffect(() => {
-    if (!props.peopleData) return;
+    if (!props.people) return;
     let activePeopleArray: DocumentData[] = [];
-    props.peopleData.forEach((parson) => {
+    props.people.forEach((parson) => {
       if (parson.file === props.activeFile) {
         activePeopleArray.push(parson);
       }
     });
     setActivePeople(activePeopleArray);
-  }, [props.activeFile, props.peopleData]);
+  }, [props.activeFile, props.people]);
 
   // useEffect(() => {
   //   console.log("▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽");

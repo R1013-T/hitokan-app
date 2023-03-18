@@ -14,15 +14,15 @@ const Panel = (props: Props) => {
       </div>
 
       <div className={styles.headWrap}>
-        <label>{props.parson.labels[0]}</label>
-        <input type="text" value={props.parson.values[0]} readOnly />
+        <label>{props.parson.labels[1]}</label>
+        <input type="text" value={props.parson.values[1]} readOnly />
       </div>
 
       <div className={styles.itemWrap}>
         {props.parson.values?.map((item: string, i: number) => (
           <div
             key={i}
-            className={`${styles.item} ${i === 0 ? styles.hidden : ""}`}
+            className={`${styles.item} ${i <= 1 ? styles.hidden : ""}`}
           >
             <label>{props.parson.labels[i]}</label>
             <input type="text" value={item} readOnly />

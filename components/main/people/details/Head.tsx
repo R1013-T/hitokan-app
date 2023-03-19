@@ -8,11 +8,15 @@ import {
   VscSave,
   VscAdd,
 } from "react-icons/vsc";
+import { useEffect } from "react";
+import { auth, db } from "lib/firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 
 interface Props {
   activeParson?: any;
   changeActiveParson: Function;
   save: Function;
+  changeIsLoading: Function;
 }
 
 const Head = (props: Props) => {
@@ -32,8 +36,22 @@ const Head = (props: Props) => {
   const handleCopyClick = () => {
     console.log("copy");
   };
-  const handleTrashClick = () => {
-    console.log("trash");
+  const handleTrashClick = async () => {
+    const user = auth.currentUser
+    if (!user) return
+    const docRef = doc(db, "usersData", user.uid, "people", props.activeParson.id);
+    const res = window.confirm("削除しますか?");
+    if (!res) return;
+    props.changeIsLoading(true);
+    await deleteDoc(docRef)
+      .then(() => {
+        props.changeIsLoading(false);
+        props.changeActiveParson("none");
+      })
+      .catch((err) => {
+        props.changeIsLoading(false);
+        console.log(err.message);
+      });
   };
 
   return (

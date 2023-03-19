@@ -1,4 +1,5 @@
-import { DocumentData } from "firebase/firestore";
+import { doc, DocumentData, updateDoc } from "firebase/firestore";
+import { auth, db } from "lib/firebase";
 import { useEffect, useState } from "react";
 import Loading from "~/Loading";
 import styles from "./Details.module.scss";
@@ -35,7 +36,7 @@ const View = (props: Props) => {
     save();
   };
 
-  const save = () => {
+  const save = async () => {
     const formEl: any = document.forms;
     const inputArray = formEl.activePeopleForm.input;
 
@@ -50,20 +51,38 @@ const View = (props: Props) => {
     });
 
     // 画像データを配列に追加
-    
-    console.log(props.activeParson.id);
-    console.log(imageCode);
-    console.log("labelArray:", labelArray);
-    console.log("valueArray:", valueArray);
+    labelArray.unshift("image");
+    valueArray.unshift(imageCode);
 
     setIsLoading(true);
 
     // Firestoreにidで変更
 
-    setTimeout(function () {
-      setIsLoading(false);
-      props.changeActiveParson("none");
-    }, 1000);
+    const user = auth.currentUser;
+    if (!user) return;
+    const docRef = doc(
+      db,
+      "usersData",
+      user.uid,
+      "people",
+      props.activeParson.id
+    );
+
+    await updateDoc(docRef, {
+      labels: labelArray,
+      values: valueArray,
+    })
+      .then(() => {
+        setIsLoading(false);
+        props.changeActiveParson("none");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const changeIsLoading = (state: boolean) => {
+    setIsLoading(state);
   };
 
   return (
@@ -74,6 +93,7 @@ const View = (props: Props) => {
         activeParson={props.activeParson}
         changeActiveParson={props.changeActiveParson}
         save={save}
+        changeIsLoading={changeIsLoading}
       />
 
       <form name="activePeopleForm" onSubmit={handleSubmit}>

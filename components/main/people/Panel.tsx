@@ -10,7 +10,7 @@ const Panel = (props: Props) => {
     <div className={styles.panelContainer}>
 
       <div className={styles.imageWrap}>
-        
+        <img src={props.parson.values[0]} alt="" />
       </div>
 
       <div className={styles.headWrap}>

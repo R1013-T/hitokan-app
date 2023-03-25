@@ -38,16 +38,17 @@ const View = (props: Props) => {
 
   const save = async () => {
     const formEl: any = document.forms;
-    const inputArray = formEl.activePeopleForm.input;
-
-    if (!inputArray) return;
+    const valueInput = formEl.activePeopleForm.valueInput;
+    const labelInput = formEl.activePeopleForm.labelInput;
 
     const labelArray: string[] = [];
     const valueArray: string[] = [];
 
-    inputArray.forEach((input: any) => {
-      labelArray.push(input.id);
+    valueInput.forEach((input: any) => {
       valueArray.push(input.value);
+    });
+    labelInput.forEach((input: any) => {
+      labelArray.push(input.value);
     });
 
     // 画像データを配列に追加
@@ -71,8 +72,10 @@ const View = (props: Props) => {
     await updateDoc(docRef, {
       labels: labelArray,
       values: valueArray,
+      updatedAt: new Date(),
     })
       .then(() => {
+        console.log(valueArray);
         setIsLoading(false);
         props.changeActiveParson("none");
       })
@@ -96,22 +99,26 @@ const View = (props: Props) => {
         changeIsLoading={changeIsLoading}
       />
 
-      <form name="activePeopleForm" onSubmit={handleSubmit}>
-        <div className={styles.dataWrap}>
-          {values.map((value: string, i: number) => (
-            <div key={i} className={`${styles.itemWrap}`}>
-              <Item
-                index={i}
-                label={labels[i]}
-                value={value}
-                changeImageCode={changeImageCode}
-                imageCode={imageCode}
-              />
-            </div>
-          ))}
-        </div>
-        <button type="submit">保存して閉じる</button>
-      </form>
+      <div className={styles.formWrap}>
+        <form name="activePeopleForm" onSubmit={handleSubmit}>
+          <div className={styles.dataWrap}>
+            {values.map((value: string, i: number) => (
+              <div key={i} className={`${styles.itemWrap}`}>
+                <Item
+                  index={i}
+                  label={labels[i]}
+                  value={value}
+                  changeImageCode={changeImageCode}
+                  imageCode={imageCode}
+                />
+              </div>
+            ))}
+          </div>
+          <button className={styles.save} type="submit">
+            Save
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

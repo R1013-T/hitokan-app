@@ -1,0 +1,82 @@
+@import "../../../../../styles/Variable.module.scss";
+
+.inner {
+  width: 60vw;
+  height: 80dvh;
+  background: $white_lv3;
+  border-radius: 5px;
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  .head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    p {
+      width: 95%;
+      margin: 0 auto;
+      padding: 12px 0;
+      text-align: center;
+      color: $black_lv1;
+      font-size: 15px;
+      border-bottom: 1px solid $white_lv1;
+      letter-spacing: 1px;
+    }
+  }
+
+  form {
+    width: 90%;
+    margin: 0 auto;
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: $black_lv2;
+      letter-spacing: 1px;
+    }
+    
+    input {
+      width: 100%;
+      display: block;
+      color: $black_lv3;
+      padding: 7px 10px;
+      margin: 10px 0 5px;
+      border: 1px solid $white_lv1;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      font-size: 16px;
+
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+
+    .attention {
+      font-size: 13px;
+      color: $red;
+      height: 20px;
+      margin: 7px auto 10px 2px;
+    }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      color: $white_lv3;
+      font-size: 14px;
+      background: $theme;
+      border-radius: 3px;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .inner {
+    width: 80vw !important;
+    height: 70dvh !important;
+  }
+}

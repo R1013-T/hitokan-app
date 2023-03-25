@@ -15,15 +15,13 @@ interface Props {
 const Item = (props: Props) => {
   const [base64Text, setBase64Text] = useState<string>("");
   const [value, setValue] = useState<string>("");
+  const [label, setLabel] = useState<string>("");
 
   useEffect(() => {
     setBase64Text(props.imageCode);
     setValue(props.value);
+    setLabel(props.label);
   }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value);
-  };
 
   const handleChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -34,7 +32,7 @@ const Item = (props: Props) => {
 
     // 画像リサイズ
     const options = {
-      maxSizeMB: 1,
+      maxSizeMB: 0.1,
     };
 
     let resizeFile: Blob | undefined = undefined;
@@ -73,13 +71,19 @@ const Item = (props: Props) => {
     <div className={styles.data}>
       {props.index != 0 ? (
         <div className={styles.valueWrap}>
-          <label htmlFor={String(props.index)}>{props.label}</label>
           <input
-            id={String(props.label)}
-            name="input"
+            name="labelInput"
             type="text"
+            className={styles.labelInput}
+            value={label}
+            onChange={(e) => setLabel(e.currentTarget.value)}
+          />
+          <input
+            name="valueInput"
+            type="text"
+            className={styles.valueInput}
             value={value}
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => setValue(e.currentTarget.value)}
           />
         </div>
       ) : (

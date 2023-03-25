@@ -23,14 +23,6 @@ const ActivePeople = (props: Props) => {
     setActivePeople(activePeopleArray);
   }, [props.activeFile, props.people]);
 
-  // useEffect(() => {
-  //   console.log("▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽");
-  //   activePeople?.forEach((parson) => {
-  //     console.log(parson);
-  //   });
-  //   console.log("△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△");
-  // }, [activePeople]);
-
   const handleParsonClick = (parson: DocumentData) => {
     props.changeActiveParson(parson)
   };

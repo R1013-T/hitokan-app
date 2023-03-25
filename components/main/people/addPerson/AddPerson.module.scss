@@ -1,0 +1,44 @@
+@import "../../../../styles/Variable.module.scss";
+
+.inner {
+  width: 60vw;
+  height: 80dvh;
+  background: $white_lv3;
+  border-radius: 5px;
+
+  .head {
+    width: 100%;
+
+    p {
+      width: 95%;
+      margin: 0 auto;
+      padding: 12px 0;
+      text-align: center;
+      color: $black_lv1;
+      font-size: 15px;
+      border-bottom: 1px solid $white_lv1;
+      letter-spacing: 1px;
+    }
+  }
+
+  .main {
+    width: 100%;
+    height: calc(100% - 40px);
+  }
+}
+
+.templateEdit {
+  position: fixed;
+  right: 25px;
+  top: 16px;
+  color: $black_lv2;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    width: 80vw !important;
+    height: 70dvh !important;
+  }
+}

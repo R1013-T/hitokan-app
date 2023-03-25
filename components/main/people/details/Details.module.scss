@@ -4,25 +4,30 @@
   width: 100%;
   height: 100%;
 
-  form {
+  .formWrap {
     width: 100%;
-    max-width: 700px;
-    height: 100%;
-    margin: 0 auto;
+    height: calc(100% - 110px);
     overflow-x: scroll;
 
-    button {
-      display: block;
-      width: 95%;
+    form {
+      width: 100%;
+      height: auto;
       margin: 0 auto;
-      transform: translateY(-140px);
-      background-color: $theme;
-      color: $white_lv3;
-      border-radius: 4px;
-      text-align: center;
-      padding: 12px 0;
-      font-size: 14px;
-      letter-spacing: 2px;
+      overflow-x: scroll;
+
+      button {
+        display: block;
+        width: 95%;
+        max-width: 670px;
+        margin: 50px auto 20px;
+        background-color: $theme;
+        color: $white_lv3;
+        border-radius: 4px;
+        text-align: center;
+        padding: 12px 0;
+        font-size: 14px;
+        letter-spacing: 2px;
+      }
     }
   }
 }
@@ -94,7 +99,9 @@
 
 .dataWrap {
   width: 100%;
-  height: calc(100% + 80px);
+  max-width: 700px;
+  margin: 0 auto;
+  height: auto;
 
   .itemWrap {
     width: 100%;
@@ -159,21 +166,25 @@
     height: 100%;
     padding: 15px;
 
-    label {
-      display: block;
-      color: $black_lv1;
-      font-size: 13px;
-      margin: 20px 0 6px;
-    }
-
     input {
       width: 100%;
-      color: $black_lv3;
-      border: 1px solid $white_lv1;
-      border-radius: 3px;
-      background: $white_lv2;
-      font-size: 16px;
-      padding: 8px 7px;
+      outline: none;
+
+      &.labelInput {
+        display: block;
+        color: $black_lv1;
+        font-size: 13px;
+        margin: 20px 0 6px;
+      }
+
+      &.valueInput {
+        color: $black_lv3;
+        border: 1px solid $white_lv1;
+        border-radius: 3px;
+        background: $white_lv2;
+        font-size: 16px;
+        padding: 8px 7px;
+      }
     }
   }
 }

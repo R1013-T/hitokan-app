@@ -1,0 +1,238 @@
+@import "../../../../../styles/Variable.module.scss";
+
+.fileWrap {
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  form {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: $black_lv2;
+      letter-spacing: 1px;
+    }
+
+    input {
+      width: 100%;
+      display: block;
+      color: $black_lv3;
+      padding: 7px 10px;
+      margin: 10px 0 5px;
+      border: 1px solid $white_lv1;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      font-size: 16px;
+      outline: none;
+
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      color: $white_lv3;
+      font-size: 14px;
+      background: $theme;
+      border-radius: 3px;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .attention {
+      font-size: 13px;
+      color: $red;
+      height: 20px;
+      margin: 7px auto 10px 2px;
+    }
+  }
+}
+
+.wrapper {
+  height: 100%;
+  width: 95%;
+  margin: 0 auto;
+  // border: 1px solid red;
+
+  .fileNameWrap {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba($color: $black_lv1, $alpha: 0.8);
+    border-radius: 20px;
+
+    .arrowWrap {
+      margin: 5px 0 5px 6px;
+      padding: 5px 7px;
+      font-size: 16px;
+      color: $black_lv1;
+      border: 1px solid $black_lv1;
+      border-radius: 50%;
+      transition: all 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background: $white_lv1;
+        border: 1px solid $white_lv1;
+
+        .arrow {
+          color: $white_lv3;
+        }
+      }
+
+      .arrow {
+        transition: all 0.3s;
+        transform: translate(0, -1.5px);
+      }
+    }
+
+    p {
+      padding: 3px 10px;
+      font-size: 18px;
+      color: $black_lv3;
+      letter-spacing: 2px;
+    }
+  }
+
+  form {
+    width: 100%;
+    margin-top: 10px;
+    height: calc(100% - 90px);
+    overflow-y: scroll;
+
+    // border: 1px solid;
+
+    .attention {
+      width: 90%;
+      margin: 20px 0 60px;
+      font-size: 12px;
+      color: $red;
+      padding: 0 10px;
+      height: 12px;
+    }
+
+    button {
+      position: fixed;
+      bottom: 10px;
+      width: 94%;
+      left: 3%;
+      display: block;
+      margin: 20px auto 0;
+      padding: 11px;
+      color: $white_lv3;
+      font-size: 14px;
+      background: $theme;
+      border-radius: 4px;
+      text-align: center;
+      letter-spacing: 2px;
+      border: 2px solid $white_lv3;
+    }
+  }
+}
+
+.inputContainer {
+  width: 95%;
+  margin: 0 auto;
+  position: relative;
+
+  input {
+    outline: none;
+
+    &.label {
+      width: 100%;
+      display: block;
+      font-size: 12px;
+      color: $black_lv2;
+      letter-spacing: 1px;
+      margin-top: 13px;
+      height: 17px;
+    }
+
+    &.value {
+      width: 100%;
+      display: block;
+      color: $black_lv3;
+      padding: 7px 10px;
+      margin: 7px 0 5px;
+      border: 1px solid $white_lv1;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      font-size: 16px;
+    }
+  }
+
+  .buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    .item {
+      border: 1px solid $white_lv1;
+      font-size: 15px;
+      padding: 2px;
+      color: rgba($color: $blue, $alpha: 0.7);
+      background: $white_lv2;
+      cursor: pointer;
+
+      &:first-of-type {
+        margin-bottom: 2px;
+        color: rgba($color: $red, $alpha: 0.7);
+      }
+    }
+  }
+}
+
+.imageWrap {
+  display: grid;
+  place-items: center;
+  margin: 30px auto 10px;
+  padding-bottom: 5px;
+
+  .img {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: $white_lv3;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      color: $white_lv3;
+      background: rgba($color: #000000, $alpha: 0.4);
+      display: grid;
+      place-items: center;
+
+      .imageSelectIcon {
+        font-size: 22px;
+        color: $white_lv3;
+      }
+
+      input {
+        display: none;
+      }
+    }
+  }
+}

@@ -5,11 +5,122 @@
   height: 80dvh;
   background: $white_lv3;
   border-radius: 5px;
+  position: relative;
+
+  .head {
+    width: 95%;
+    margin: 0 auto;
+
+    p {
+      width: 100%;
+      padding: 12px 0;
+      text-align: center;
+      color: $black_lv1;
+      font-size: 15px;
+      border-bottom: 1px solid $white_lv1;
+      letter-spacing: 4px;
+    }
+
+    .settingList {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      border-bottom: 1px solid $white_lv1;
+
+      li {
+        font-size: 14px;
+        letter-spacing: 1px;
+        color: $black_lv2;
+
+        position: relative;
+
+        &::after {
+          position: absolute;
+          left: -10%;
+          content: "";
+          width: 120%;
+          height: 2px;
+          border-radius: 3px;
+          background: $theme;
+          bottom: -9px;
+          transform: scale(0, 1);
+          transform-origin: center top;
+          transition: transform 0.25s;
+        }
+
+        &.active {
+          &::after {
+            transform: scale(1, 1);
+          }
+        }
+      }
+    }
+  }
+
+  .main {
+    width: 95%;
+    height: calc(100% - 100px);
+    margin: 5px auto 0;
+  }
+
+  .version {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    letter-spacing: 1px;
+    font-size: 11px;
+    color: $black_lv1;
+  }
 }
 
 @media (max-width: 900px) {
   .inner {
     width: 80vw !important;
     height: 70dvh !important;
+  }
+}
+
+.accountWrap {
+  width: 90%;
+  height: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+
+  form {
+    margin-top: 30px;
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 13px;
+      color: $black_lv2;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      color: $black_lv3;
+      border: 1px solid $white_lv1;
+      border-radius: 3px;
+      padding: 7px 9px;
+      font-size: 16px;
+      margin: 5px 0 15px;
+      text-align: center;
+      outline: none;
+      cursor: default;
+    }
+
+    button {
+      width: 100%;
+      background: $theme;
+      color: $white_lv3;
+      margin-top: 20px;
+      padding: 11px 0;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 2px;
+      border-radius: 3px;
+    }
   }
 }

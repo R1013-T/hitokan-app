@@ -13,7 +13,6 @@ const Header = () => {
           className={styles.logo}
           onClick={() => location.reload()}
         />
-        {/* <div className={styles.space}></div> */}
       </div>
     </div>
   );

@@ -31,12 +31,8 @@ const Head = (props: Props) => {
   const handleSaveClick = () => {
     props.save();
   };
-  const handleAddClick = () => {
-    console.log("add");
-  };
 
   const handleFolderClick = () => {
-    console.log(props.activeParson.file);
     changeShow(true);
   };
 

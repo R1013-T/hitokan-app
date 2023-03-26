@@ -12,6 +12,7 @@ interface Props {
   changeImageCode: Function;
   imageCode: string;
   isEdit: boolean;
+  changeValues: Function;
 }
 
 const Item = (props: Props) => {
@@ -25,12 +26,15 @@ const Item = (props: Props) => {
     setLabel(props.label);
   }, []);
 
+  useEffect(() => {
+    setValue(props.value);
+    setLabel(props.label);
+  }, [props.value, props.label]);
+
   const handleChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
     if (!file) return;
-
-    console.log(file);
 
     // 画像リサイズ
     const options = {
@@ -94,7 +98,7 @@ const Item = (props: Props) => {
           {props.isEdit ? (
             <VscRemove
               className={`${styles.button} ${styles.del}`}
-              // onClick={() => props.changeLabels(false, props.index)}
+              onClick={() => props.changeValues(false, props.index)}
             />
           ) : (
             ""
@@ -102,7 +106,7 @@ const Item = (props: Props) => {
           {props.isEdit ? (
             <VscAdd
               className={`${styles.button} ${styles.add}`}
-              // onClick={() => props.changeLabels(true, props.index)}
+              onClick={() => props.changeValues(true, props.index)}
             />
           ) : (
             ""

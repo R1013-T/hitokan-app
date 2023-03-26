@@ -36,7 +36,6 @@ const View = (props: Props) => {
   }, [activeFileName, activeFileNumber]);
 
   useEffect(() => {
-    console.log("files:", props.files);
     setFiles(props.files)
   }, [props.files]);
 

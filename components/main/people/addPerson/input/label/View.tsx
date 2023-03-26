@@ -56,10 +56,6 @@ const View = (props: Props) => {
     setLabels(labelArray);
   }, [settingData]);
 
-  useEffect(() => {
-    console.log(labels);
-  }, [labels]);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -116,8 +112,6 @@ const View = (props: Props) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    console.log(file);
-
     // 画像リサイズ
     const options = {
       maxSizeMB: 0.1,
@@ -156,14 +150,12 @@ const View = (props: Props) => {
 
   const changeLabels = (isAdd: boolean, index: number) => {
     if (isAdd) {
-      console.log("add", index);
       setLabels((prevState) => {
         const arr = [...prevState];
         arr.splice(index + 1, 0, "");
         return arr;
       });
     } else {
-      console.log("del", index);
       setLabels(labels.filter((label, i) => i != index));
     }
   };

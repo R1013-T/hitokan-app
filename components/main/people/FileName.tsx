@@ -8,9 +8,6 @@ interface Props {
 }
 
 const FileName = (props: Props) => {
-  useEffect(() => {
-    // if (props.activeFile) console.log(props.activeFile);
-  }, [props.activeFile]);
 
   return (
     <div className={styles.fileNameWrap}>

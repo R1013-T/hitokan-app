@@ -15,7 +15,6 @@ const Inner = (props: Props) => {
   const [labels, setLabels] = useState<any[]>([]);
 
   useEffect(() => {
-    console.log("aaaa");
     getTemplate();
   }, []);
 
@@ -35,9 +34,6 @@ const Inner = (props: Props) => {
     });
     setLabels(labelArray);
   };
-  useEffect(() => {
-    console.log("labels:", labels);
-  }, [labels]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,8 +54,6 @@ const Inner = (props: Props) => {
 
   // Firestoreに保存
   const setTemplateFirestore = async (template: any) => {
-    console.log(template);
-
     const user = auth.currentUser;
     if (!user) return;
     const docRef = doc(db, "usersData", user.uid, "data", "setting");
@@ -76,14 +70,12 @@ const Inner = (props: Props) => {
 
   const changeLabels = (isAdd: boolean, index: number) => {
     if (isAdd) {
-      console.log("add", index);
       setLabels((prevState) => {
         const arr = [...prevState];
         arr.splice(index + 1, 0, "");
         return arr;
       });
     } else {
-      console.log("del", index);
       setLabels(labels.filter((label, i) => i != index));
     }
   };

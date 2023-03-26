@@ -20,7 +20,6 @@ const View = (props: Props) => {
   const [labels, setLabels] = useState<string[]>([]);
 
   useEffect(() => {
-    console.log("activeParson:", props.activeParson);
     setValues(props.activeParson.values);
     setLabels(props.activeParson.labels);
 
@@ -76,7 +75,6 @@ const View = (props: Props) => {
       updatedAt: new Date(),
     })
       .then(() => {
-        console.log(valueArray);
         setIsLoading(false);
         props.changeActiveParson("none");
       })
@@ -91,6 +89,25 @@ const View = (props: Props) => {
 
   const changeIsEdit = () => {
     setIsEdit((prevState) => !prevState);
+  };
+
+  const changeValues = (isAdd: boolean, index: number) => {
+    console.log("a");
+    if (isAdd) {
+      setValues((prevState) => {
+        const arr = [...prevState];
+        arr.splice(index + 1, 0, "");
+        return arr;
+      });
+      setLabels((prevState) => {
+        const arr = [...prevState];
+        arr.splice(index + 1, 0, "");
+        return arr;
+      });
+    } else {
+      setValues(values.filter((label, i) => i != index));
+      setLabels(labels.filter((label, i) => i != index));
+    }
   };
 
   return (
@@ -118,6 +135,7 @@ const View = (props: Props) => {
                   changeImageCode={changeImageCode}
                   imageCode={imageCode}
                   isEdit={isEdit}
+                  changeValues={changeValues}
                 />
               </div>
             ))}

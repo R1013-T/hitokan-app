@@ -10,6 +10,7 @@
   border-radius: 50%;
   overflow: hidden;
   background: $theme;
+  z-index: 10;
 
   .addButton {
     width: 100%;

@@ -140,7 +140,7 @@
 
 .inputContainer {
   width: 95%;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   position: relative;
 
   input {
@@ -169,23 +169,36 @@
     }
   }
 
-  .buttons {
+  .button {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    display: block;
+    border: 1px solid;
+    margin-top: 2px;
+    padding: 4px;
+    font-size: 22px;
+    border-radius: 50%;
+    opacity: 0.7;
+    transform: all 0.3s;
+    cursor: pointer;
 
-    .item {
-      border: 1px solid $white_lv1;
-      font-size: 15px;
-      padding: 2px;
-      color: rgba($color: $blue, $alpha: 0.7);
-      background: $white_lv2;
-      cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
 
-      &:first-of-type {
-        margin-bottom: 2px;
-        color: rgba($color: $red, $alpha: 0.7);
-      }
+    &.add {
+      border-color: rgba($color: $theme, $alpha: 0.4);
+      background: rgba($color: $theme, $alpha: 0.1);
+      color: $theme;
+      bottom: -35px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+    &.del {
+      border-color: rgba($color: $red, $alpha: 0.4);
+      background: rgba($color: $red, $alpha: 0.1);
+      color: $red;
+      right: 10px;
+      bottom: 6px;
     }
   }
 }

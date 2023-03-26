@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Details.module.scss";
 
+import { VscAdd, VscRemove } from "react-icons/vsc";
 import { HiOutlinePhoto } from "react-icons/hi2";
 import imageCompression from "browser-image-compression";
 
@@ -10,6 +11,7 @@ interface Props {
   value: string;
   changeImageCode: Function;
   imageCode: string;
+  isEdit: boolean;
 }
 
 const Item = (props: Props) => {
@@ -70,13 +72,16 @@ const Item = (props: Props) => {
   return (
     <div className={styles.data}>
       {props.index != 0 ? (
-        <div className={styles.valueWrap}>
+        <div
+          className={`${styles.valueWrap} ${props.isEdit ? styles.isEdit : ""}`}
+        >
           <input
             name="labelInput"
             type="text"
             className={styles.labelInput}
             value={label}
             onChange={(e) => setLabel(e.currentTarget.value)}
+            readOnly={props.isEdit ? false : true}
           />
           <input
             name="valueInput"
@@ -84,20 +89,41 @@ const Item = (props: Props) => {
             className={styles.valueInput}
             value={value}
             onChange={(e) => setValue(e.currentTarget.value)}
+            readOnly={props.isEdit ? false : true}
           />
+          {props.isEdit ? (
+            <VscRemove
+              className={`${styles.button} ${styles.del}`}
+              // onClick={() => props.changeLabels(false, props.index)}
+            />
+          ) : (
+            ""
+          )}
+          {props.isEdit ? (
+            <VscAdd
+              className={`${styles.button} ${styles.add}`}
+              // onClick={() => props.changeLabels(true, props.index)}
+            />
+          ) : (
+            ""
+          )}
         </div>
       ) : (
         <div id="imageWrap" className={styles.imageWrap}>
           <div className={styles.img}>
             <img id="iconImage" src="" alt="" />
-            <label>
-              <HiOutlinePhoto className={styles.imageSelectIcon} />
-              <input
-                type="file"
-                accept=".png,.jpeg,.jpg"
-                onChange={(e) => handleChangeImage(e)}
-              />
-            </label>
+            {props.isEdit ? (
+              <label>
+                <HiOutlinePhoto className={styles.imageSelectIcon} />
+                <input
+                  type="file"
+                  accept=".png,.jpeg,.jpg"
+                  onChange={(e) => handleChangeImage(e)}
+                />
+              </label>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       )}

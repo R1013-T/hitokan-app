@@ -13,6 +13,7 @@ interface Props {
 
 const View = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const [imageCode, setImageCode] = useState<string>("");
   const [values, setValues] = useState<string[]>([]);
@@ -88,6 +89,10 @@ const View = (props: Props) => {
     setIsLoading(state);
   };
 
+  const changeIsEdit = () => {
+    setIsEdit((prevState) => !prevState);
+  };
+
   return (
     <div className={styles.container}>
       {isLoading ? <Loading text="保存中です" /> : ""}
@@ -97,6 +102,8 @@ const View = (props: Props) => {
         changeActiveParson={props.changeActiveParson}
         save={save}
         changeIsLoading={changeIsLoading}
+        isEdit={isEdit}
+        changeIsEdit={changeIsEdit}
       />
 
       <div className={styles.formWrap}>
@@ -110,13 +117,18 @@ const View = (props: Props) => {
                   value={value}
                   changeImageCode={changeImageCode}
                   imageCode={imageCode}
+                  isEdit={isEdit}
                 />
               </div>
             ))}
           </div>
-          <button className={styles.save} type="submit">
-            Save
-          </button>
+          {values.length != 0 ? (
+            <button className={styles.save} type="submit">
+              Save
+            </button>
+          ) : (
+            ""
+          )}
         </form>
       </div>
     </div>

@@ -60,22 +60,6 @@ const View = (props: Props) => {
     console.log(labels);
   }, [labels]);
 
-  const changeLabels = (label: string, place: number) => {
-    let labelArray = labels;
-    console.log(label, place, labelArray);
-
-    if (label) {
-      //追加
-      console.log("tuika");
-    } else {
-      //削除
-      labelArray.slice(place, 1);
-    }
-
-    console.log(labelArray);
-    setLabels(labelArray);
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -169,6 +153,20 @@ const View = (props: Props) => {
       iconImage.src = base64Text;
     }
   }, [base64Text]);
+
+  const changeLabels = (isAdd: boolean, index: number) => {
+    if (isAdd) {
+      console.log("add", index);
+      setLabels((prevState) => {
+        const arr = [...prevState];
+        arr.splice(index + 1, 0, "");
+        return arr;
+      });
+    } else {
+      console.log("del", index);
+      setLabels(labels.filter((label, i) => i != index));
+    }
+  };
 
   return (
     <div className={styles.wrapper}>

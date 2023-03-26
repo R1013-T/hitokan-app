@@ -7,7 +7,12 @@ import Account from "./Account";
 import Display from "./Display";
 import Template from "./Template";
 
-const Option = () => {
+interface Props {
+  changeIsLoading: Function;
+  close: Function;
+}
+
+const Option = (props: Props) => {
   const [isActive, setIsActive] = useState("account");
 
   return (
@@ -38,7 +43,14 @@ const Option = () => {
       <main className={styles.main}>
         {isActive === "account" ? <Account /> : ""}
         {isActive === "display" ? <Display /> : ""}
-        {isActive === "template" ? <Template /> : ""}
+        {isActive === "template" ? (
+          <Template
+            changeIsLoading={props.changeIsLoading}
+            close={props.close}
+          />
+        ) : (
+          ""
+        )}
       </main>
       <small className={styles.version}>Hitokan v0.50</small>
     </div>

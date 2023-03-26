@@ -1,8 +1,10 @@
+import Inner from "./Inner";
 import styles from "./Template.module.scss";
 
 interface Props {
   close: Function;
   changeShow: Function;
+  changeIsLoading: Function;
 }
 
 const Template = (props: Props) => {
@@ -25,7 +27,9 @@ const Template = (props: Props) => {
       >
         設定
       </button>
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <Inner changeIsLoading={props.changeIsLoading} close={props.close} />
+      </main>
     </div>
   );
 };

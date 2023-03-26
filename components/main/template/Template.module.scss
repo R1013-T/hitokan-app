@@ -22,15 +22,16 @@
   }
 
   .main {
-    width: 100%;
-    height: calc(100% - 40px);
+    width: 95%;
+    height: calc(100% - 55px);
+    margin: 5px auto 0;
   }
 
   button {
     color: $black_lv2;
     font-size: 10px;
     letter-spacing: 1px;
-    
+
     &.addPerson {
       position: fixed;
       right: 25px;
@@ -41,6 +42,85 @@
       position: fixed;
       left: 25px;
       top: 16px;
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+
+  form {
+    .labelsWrap {
+    }
+
+    .saveButton {
+      background: $theme;
+      display: block;
+      width: 90%;
+      margin: 20px auto;
+      max-width: 500px;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 14px;
+      color: $white_lv3;
+      letter-spacing: 2px;
+      border-radius: 3px;
+    }
+  }
+}
+
+.labelWrap {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 5px 3px;
+  font-size: 15px;
+  position: relative;
+
+  input {
+    display: block;
+    width: 100%;
+    color: $black_lv3;
+    border: 1px solid $white_lv1;
+    border-radius: 3px;
+    padding: 7px 9px;
+    font-size: 16px;
+    margin: 5px 0 25px;
+    outline: none;
+    cursor: default;
+  }
+
+  .button {
+    position: absolute;
+    display: block;
+    border: 1px solid;
+    margin-top: 2px;
+    padding: 4px;
+    font-size: 22px;
+    border-radius: 50%;
+    opacity: 0.7;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.add {
+      border-color: rgba($color: $theme, $alpha: 0.4);
+      background: rgba($color: $theme, $alpha: 0.1);
+      color: $theme;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+    &.del {
+      border-color: rgba($color: $red, $alpha: 0.4);
+      background: rgba($color: $red, $alpha: 0.1);
+      color: $red;
+      right: 10px;
+      bottom: 36px;
     }
   }
 }

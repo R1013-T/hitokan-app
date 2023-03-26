@@ -63,18 +63,22 @@
     place-items: center;
     color: $black_lv2;
     border-bottom: 1px solid rgba($color: $black_lv1, $alpha: 0.5);
-    transition: all 0.3;
+    transition: all 0.3s;
 
     &:hover {
       background: $white_lv2;
       border-bottom: 1px solid rgba($color: $black_lv1, $alpha: 0.5);
 
       .item {
-        &.close {
+        &.close,
+        &.edit {
           color: #000;
         }
         &.trash {
           color: $red;
+        }
+        &.isEdit {
+          color: $theme;
         }
         color: $theme;
       }
@@ -89,9 +93,8 @@
         font-size: 27px;
       }
 
-      &.add {
-        font-size: 23px;
-        transform: translate(1px, 1px);
+      &.isEdit {
+        color: $theme;
       }
     }
   }
@@ -101,16 +104,13 @@
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
-  height: auto;
 
   .itemWrap {
     width: 100%;
-    height: 80px;
   }
 }
 
 .data {
-  height: 70px;
   width: 100%;
 
   .imageWrap {
@@ -135,6 +135,10 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
       }
 
       label {
@@ -148,6 +152,7 @@
         background: rgba($color: #000000, $alpha: 0.4);
         display: grid;
         place-items: center;
+        animation: show 0.2s;
 
         .imageSelectIcon {
           font-size: 22px;
@@ -163,8 +168,9 @@
 
   .valueWrap {
     width: 100%;
-    height: 100%;
-    padding: 15px;
+    padding: 0 15px;
+    transition: all 0.3s;
+    position: relative;
 
     input {
       width: 100%;
@@ -186,5 +192,53 @@
         padding: 8px 7px;
       }
     }
+
+    &.isEdit {
+      padding-bottom: 20px;
+    }
+
+    .button {
+      position: absolute;
+      display: block;
+      border: 1px solid;
+      margin-top: 2px;
+      padding: 4px;
+      font-size: 22px;
+      border-radius: 50%;
+      opacity: 0;
+      transition: all 0.3s;
+      cursor: pointer;
+
+      animation: show 0.2s 0.1s ease-in forwards;
+
+      &:hover {
+        opacity: 1 !important;
+      }
+
+      &.add {
+        border-color: rgba($color: $theme, $alpha: 0.4);
+        background: rgba($color: $theme, $alpha: 0.1);
+        color: $theme;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      &.del {
+        border-color: rgba($color: $red, $alpha: 0.4);
+        background: rgba($color: $red, $alpha: 0.1);
+        color: $red;
+        right: 23px;
+        bottom: 27px;
+      }
+    }
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.7;
   }
 }

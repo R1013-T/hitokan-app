@@ -25,9 +25,9 @@ const Cover = (props: Props) => {
     setShow(show);
   };
 
-  const changeIsLoading = (state: boolean,text:string) => {
+  const changeIsLoading = (state: boolean, text: string) => {
     setIsLoading(state);
-    setLoadingText(text)
+    setLoadingText(text);
   };
 
   const handleClose = () => {
@@ -45,7 +45,7 @@ const Cover = (props: Props) => {
       <div className={styles.top} onClick={() => handleClose()}></div>
       <div className={styles.left} onClick={() => handleClose()}></div>
       <div className={`${styles.center} ${isClose ? styles.close : ""}`}>
-        {show === "option" ? <Option /> : ""}
+        {show === "option" ? <Option changeIsLoading={changeIsLoading} close={handleClose} /> : ""}
         {show === "changeFile" ? (
           <ChangeFile activeParson={props.activeParson} close={handleClose} />
         ) : (
@@ -61,7 +61,11 @@ const Cover = (props: Props) => {
           ""
         )}
         {show === "template" ? (
-          <Template close={handleClose} changeShow={changeShow} />
+          <Template
+            close={handleClose}
+            changeShow={changeShow}
+            changeIsLoading={changeIsLoading}
+          />
         ) : (
           ""
         )}

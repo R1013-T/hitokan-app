@@ -3,10 +3,9 @@ import styles from "./Details.module.scss";
 import {
   VscClose,
   VscTrash,
-  VscCopy,
   VscFolder,
   VscSave,
-  VscAdd,
+  VscEdit,
 } from "react-icons/vsc";
 import { useEffect, useState } from "react";
 import { auth, db } from "lib/firebase";
@@ -18,6 +17,8 @@ interface Props {
   changeActiveParson: Function;
   save: Function;
   changeIsLoading: Function;
+  isEdit: boolean;
+  changeIsEdit: Function;
 }
 
 const Head = (props: Props) => {
@@ -95,9 +96,11 @@ const Head = (props: Props) => {
         </div>
       </div>
       <div className={styles.right}>
-        {/* <div className={styles.itemWrap} title="追加" onClick={handleAddClick}>
-          <VscAdd className={`${styles.item} ${styles.add}`} />
-        </div> */}
+        <div className={styles.itemWrap} title="編集" onClick={() => props.changeIsEdit()}>
+          <VscEdit
+            className={`${styles.item} ${styles.edit} ${props.isEdit ? styles.isEdit : ""}`}
+          />
+        </div>
         <div
           className={styles.itemWrap}
           title="ファイルを変更"
@@ -105,13 +108,6 @@ const Head = (props: Props) => {
         >
           <VscFolder className={`${styles.item} ${styles.folder}`} />
         </div>
-        {/* <div
-          className={styles.itemWrap}
-          title="コピー"
-          onClick={handleCopyClick}
-        >
-          <VscCopy className={`${styles.item} ${styles.copy}`} />
-        </div> */}
         <div
           className={styles.itemWrap}
           title="削除"

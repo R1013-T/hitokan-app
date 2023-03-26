@@ -84,6 +84,6 @@
 
 @media (max-width: 500px) {
   .wrapper {
-    width: 0;
+    min-width: 100vw;
   }
 }

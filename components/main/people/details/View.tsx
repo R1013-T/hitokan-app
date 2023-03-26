@@ -92,7 +92,6 @@ const View = (props: Props) => {
   };
 
   const changeValues = (isAdd: boolean, index: number) => {
-    console.log("a");
     if (isAdd) {
       setValues((prevState) => {
         const arr = [...prevState];

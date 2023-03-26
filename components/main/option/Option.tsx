@@ -52,7 +52,7 @@ const Option = (props: Props) => {
           ""
         )}
       </main>
-      <small className={styles.version}>Hitokan v0.50</small>
+      <small className={styles.version}>Hitokan v1.00</small>
     </div>
   );
 };

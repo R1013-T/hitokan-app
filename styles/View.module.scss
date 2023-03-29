@@ -8,6 +8,7 @@
 
   .viewWrap {
     height: calc(100dvh - 50px);
+    overflow: hidden;
     width: 100vw;
     display: flex;
   }

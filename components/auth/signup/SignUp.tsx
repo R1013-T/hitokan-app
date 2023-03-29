@@ -49,7 +49,7 @@ const SignUp = (props: Props) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Sign up to HITOKAN</title>
+        <title>Sign up to HitokanApp</title>
       </Head>
       {isLoading.state ? (
         <Loading text={isLoading.text} compleat={isLoading.compleat} />

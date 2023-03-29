@@ -19,7 +19,7 @@ const Signin = (props: Props) => {
   return (
     <div className={styles.wrapper}>
       <Head>
-        <title>Sign in to HITOKAN</title>
+        <title>Sign in to HitokanApp</title>
       </Head>
       <CenterImage dir={1} />
       {isLoading ? <Loading text="ログイン中です" /> : ""}

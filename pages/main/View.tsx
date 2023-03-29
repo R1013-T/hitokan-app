@@ -176,7 +176,7 @@ const View = () => {
   return (
     <div className={styles.wrapper}>
       <Head>
-        <title>HITOKAN</title>
+        <title>HitokanApp</title>
       </Head>
       <Header changeShowOption={changeShowOption} />
       {isLoading ? <Loading text="ユーザー情報を取得中です" /> : ""}

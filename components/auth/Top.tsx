@@ -37,7 +37,7 @@ const Top = (props: Props) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>HITOKAN</title>
+        <title>HitokanApp</title>
       </Head>
       <CenterImage dir={1} />
       <div className={styles.buttonsWrap}>

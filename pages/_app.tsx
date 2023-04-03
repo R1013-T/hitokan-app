@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:site_name" content="ヒトカン" />
         <meta
           property="og:image"
-          content="https://hitokan-app.tokyo/images/hitokanIcon.svg"
+          content="https://hitokan-app.tokyo/images/logo.png"
         />
         <meta
           name="subject"

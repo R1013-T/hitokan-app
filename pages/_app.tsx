@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
           name="description"
           content="人間関係を簡単に管理。もう知り合いのことを忘れません。"
         />
-        <meta name="keywords" content="HITOKAN,ヒトカン,人間関係,管理,人" />
+        <meta name="keywords" content="HITOKAN,ヒトカン,hitokan,hitokan-app,HitokanApp,人間関係,管理,人" />
         <meta property="og:title" content="HitokanApp" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hitokan-app.tokyo" />
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:site_name" content="ヒトカン" />
         <meta
           property="og:image"
-          content="https://hitokan-app.tokyo/images/logo.png"
+          content="https://hitokan-app.tokyo/images/hitokanImage.png"
         />
         <meta
           name="subject"

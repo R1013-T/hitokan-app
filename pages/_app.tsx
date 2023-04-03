@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>HitokanApp</title>
         <meta
           name="description"
-          content="人間関係を簡単に管理。もう知り合いのことを忘れません。"
+          content="人間関係を簡単に管理。もう知り合いのことを忘れません。社会に出て拡大した人間関係を管理するWebアプリ。"
         />
         <meta name="keywords" content="HITOKAN,ヒトカン,hitokan,hitokan-app,HitokanApp,人間関係,管理,人" />
         <meta property="og:title" content="HitokanApp" />
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:site_name" content="ヒトカン" />
         <meta
           property="og:image"
-          content="https://hitokan-app.tokyo/images/hitokanImage.png"
+          content="https://hitokan-app.tokyo/images/hitokan-Image.png"
         />
         <meta
           name="subject"

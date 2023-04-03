@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="author" content="Welnald" />
         <link rel="start" href="https://hitokan-app.tokyo" />
-        <meta name="Targted Geographic Area" content="Japan" />
+        <meta name="Targeted Geographic Area" content="Japan" />
         <meta name="distribution" content="Local" />
         <meta name="coverage" content="Japan" />
         <meta name="classification" content="管理" />
